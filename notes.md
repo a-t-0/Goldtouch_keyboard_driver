@@ -76,4 +76,31 @@ Info= URB_INTERRUPT in
 ```
 for keypress `b`, and `0000040000000000`  for keypress `a` etc.
 
+### Repo to get stream of Leftover Capture Data and convert it to keystrokes
+https://github.com/grnbeltwarrior/USB_Keyboard_Hex
 
+```
+yes | sudo apt install tshark
+git clone https://github.com/grnbeltwarrior/USB_Keyboard_Hex.git
+cd USB_Keyboard_Hex
+```
+Then make the previously recorded `aaaaaba.pcapng` files readable, 
+```
+chmod 777
+```
+copy them into this repository and extract the Leftover Capture Data:
+```
+tshark -r 'data3.pcap' -T fields -e usb.capdata > data3.txt
+```
+Then create a final file that is supposed to remove only the zeros, but actually removes all the data:
+```
+cat data3.txt | cut -d':' -f 3 | grep -v '00' > data3_final.txt
+```
+Then run the python file on that last file with:
+```
+python USB_Hex.py
+```
+To get the keys that were pressed.
+
+### Other Python stream approach
+Source: https://stackoverflow.com/questions/57848983/how-to-convert-a-pcap-into-hex-stream-using-tshark
