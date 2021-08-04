@@ -1,13 +1,22 @@
 # Goldtouch_keyboard_driver
 Creates Ubuntu driver for usb connection of bluetooth keyboard.
 
+
+## TL;DR
+This repo converts a `.pcapng` file into its original keystrokes. For example, you can record the data that flows between your computer and keyboard by recording your USB port traffic with Wireshark. You can store that data as a `abcd.pcapng` file (e.g. I pressed `abcd` during that recording). Next the `parse_pcapng.py` converts that `abcd.pcapng` file into its original keystrokes. Run it with:
+```
+python parse_pcapng.py
+```
+- [ ] Next, I aim to make sure the USB port data is directly and continuously streamed into this python file, instead of first having to record and save the stream into a file.
+
+
 ### Install Wireshark
 Source: https://linuxhint.com/install_wireshark_ubuntu/
 ```
 yes | sudo apt install wireshark
 ```
 then chose yes when manually prompted.
-````
+```
 sudo usermod -aG wireshark $(whoami)
 sudo reboot now
 ```
@@ -28,12 +37,12 @@ After you have ensured you're in the wireshark group, make sure non-superusers c
 ```
 sudo dpkg-reconfigure wireshark-common
 ```
-Enter <yes> when prompted.
+Enter `<yes>` when prompted.
 
 ### Do at every reboot:
 Source: https://askubuntu.com/questions/1114867/operation-not-permitted-when-trying-to-modprobe-xpad
 Optional: Disable secure boot:
-````
+```
 sudo apt-get install mokutil
 mokutil --sb-state
 sudo mokutil --disable-validation
