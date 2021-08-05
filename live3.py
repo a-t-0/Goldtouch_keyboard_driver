@@ -29,6 +29,21 @@ def getData(p):
   return binascii.a2b_hex(p["USB.CAPDATA_RAW"].value)
 
 
+# Source: https://github.com/mzombor/Python-programs/blob/5efee9fe90a21ab20b1a10dcc95e2618dfedf1f8/CTF-scripts/crack2.py
+
+# go over all the packets
+for n in capture:
+    # check the ones when actual controller data is transmitted
+    #if int(n.number) > 123:# and int(n.number) < 360:
+        # handle the exceptions when there isn't extra data being handed over
+    try:
+        # turn data into integer
+        data = n[1].usb_capdata.split(":")
+        print(data)
+    except:
+        pass
+exit()
+
 #pprint(dir(capture))
 #exit()
 for packet in capture:
