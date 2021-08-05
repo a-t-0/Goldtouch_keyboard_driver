@@ -8,10 +8,9 @@ import os
 
 # CAPTURE EVERYTHING AND PRINT PACKET SUMMARIES
 print("\n----- Packet summaries --------------------")
-capture = pyshark.LiveCapture(interface='usbmon0', output_file='output.pcap')
-capture.sniff(packet_count=50) # no packets detected
-#capture.sniff(timeout=5)
-
+capture = pyshark.LiveCapture(interface="usbmon0", output_file="output.pcap")
+capture.sniff(packet_count=50)  # no packets detected
+# capture.sniff(timeout=5)
 
 
 # Source: https://github.com/mzombor/Python-programs/blob/5efee9fe90a21ab20b1a10dcc95e2618dfedf1f8/CTF-scripts/crack2.py
@@ -31,9 +30,10 @@ def print_capture_to_file(capture):
     f = open("packets.txt", "a")
     for packet in capture:
         f.write(str(packet))
-        f.write('\n\n')
+        f.write("\n\n")
     f.close()
 
+
 print_capture_to_file(capture)
-os.system('chmod 777 output.pcap')
-os.system('chmod 777 packets.txt')
+os.system("chmod 777 output.pcap")
+os.system("chmod 777 packets.txt")
