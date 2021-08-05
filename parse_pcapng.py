@@ -1,7 +1,8 @@
 # This script extracts the keypresses from a pcapng file.
 import os
 
-pcapng_filename = "abcd.pcapng"
+#pcapng_filename = "abcd.pcapng"
+pcapng_filename = "output.pcap"
 keypress_ids_filename = "keypress_ids.txt"
 
 # create the output for
