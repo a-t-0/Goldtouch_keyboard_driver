@@ -2,6 +2,65 @@
 Creates Ubuntu driver for usb connection of bluetooth keyboard.
 
 
+## Pico Instructions
+Source: https://www.youtube.com/watch?v=zlKJ5hvfs6s Time: 04:30 seconds
+0. Connect usb into Pico (not into pc yet).
+1. Boot up pc.
+2. Hold the `BOOTSEL` button while you plug in the Pico USB into the computer.
+3. That should create a drive of the Raspberry PICO. (In this case `CIRCUITPY`).
+4. The first time you use it, it should show files:
+```
+INDEX.HTM
+INFO_UF2.TXT
+```
+5. Download the MicroPython UF2 file from: https://micropython.org/resources/firmware/rp2-pico-20210902-v1.17.uf2
+6. Copy that `.uf2` file into the (root directory of the) usb drive.
+7. 
+8. Then the file should dissapear.
+9. Disconnect the Raspberry Pico.
+10. Reconnect the Raspberry Pico
+6. Install Thonny:
+```
+sudo apt-get install python3-thonny
+```
+7. Install micropython(skip):
+```
+sudo apt update
+sudo apt install snapd
+sudo snap install micropython
+```
+7. Add yourself to "the usergroup" to make sure the rpi is accessible from the normal user:
+```
+user=$(whoami)
+echo "$user"
+sudo usermod -a -G dialout $user
+sudo reboot now
+```
+6. Open Thonny with sudo:
+```
+sudo thonny
+``` 
+7. In the bottom right of Thonny, it may say: `Python 3.xx`, and you should click on it and then select:
+```
+MicroPython (Raspberry Pi Pico)
+```  
+8. Then the terminal in Thonny should show: `MicroPython v1.xx..`.
+9. Install `RPi.gpio` in Thonny by using: `Tools>Manage Plug-ins>Search for:`
+```
+RPi.GPIO
+```
+Ensure that package is found, then manually click: `Install`.
+10. Close Thonny. Restart Thonny with sudo:
+```
+sudo thonny
+``` 
+9. Then Create a new file named `hello_world.py` with content:
+```
+print(f"Hello World")
+```
+10. Store that file in: the Pico by clicking the `RUN` button.
+
+
 ## TL;DR
 This repo converts a `.pcapng` file into its original keystrokes. For example, you can record the data that flows between your computer and keyboard by recording your USB port traffic with Wireshark. You can store that data as a `abcd.pcapng` file (e.g. I pressed `abcd` during that recording). Next the `parse_pcapng.py` converts that `abcd.pcapng` file into its original keystrokes. Run it with:
 ```
