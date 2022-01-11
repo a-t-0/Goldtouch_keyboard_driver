@@ -1,8 +1,16 @@
 # This script extracts the keypresses from a pcapng file.
 import os
 
+# TODO: make all pcap and pcapng files runnable
+os.system("sudo chmod +x *.pcap")
+os.system("sudo chmod 777 *.pcap")
+os.system("sudo chmod +x *.pcapng")
+os.system("sudo chmod 777 *.pcapng")
+
 # pcapng_filename = "abcd.pcapng"
 pcapng_filename = "output.pcap"
+pcapng_filename = "other_keyboard.pcapng"
+pcapng_filename = "aaaaaaaaab.pcapng"
 keypress_ids_filename = "keypress_ids.txt"
 
 # create the output for

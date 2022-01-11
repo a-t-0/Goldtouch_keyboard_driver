@@ -14,7 +14,7 @@ def print_packet_summary(pkt):
 print("\n----- Packet summaries --------------------")
 # capture = pyshark.LiveCapture(interface='usbmon0', output_file='/home/name/Documents/keyboard/Goldtouch_keyboard_driver/output.pcap')
 capture = pyshark.LiveCapture(interface="usbmon0", output_file="output.pcap")
-capture.sniff(packet_count=50)  # no packets detected
+capture.sniff(packet_count=5)  # no packets detected
 # capture.sniff(timeout=5)
 
 
