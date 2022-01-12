@@ -127,6 +127,7 @@ def store_pin_connection_pairs_per_key(rows, pin_nrs):
             else:
                 print(f"Failed for key:{key} left={left},right={right}")
     print(connected_pins_per_key)
+    return connected_pins_per_key
 
 
 def ask_user_to_press_pin(key):
@@ -166,8 +167,39 @@ def detect_connection_between_two_pins(left, right):
     return False
 
 
-# print(detect_connection_between_two_pins(16, 17))
+def export_connected_pins_per_key(abs_output_dir, connected_pins_per_key):
+    write_dictionary_to_file(f"{abs_output_dir}/dictionary.txt", connected_pins_per_key)
+    lines = []
+    for key, value in connected_pins_per_key.items():
+        lines.append("%s:%s\n" % (key, value))
+    write_to_file(f"{abs_output_dir}/lines.txt", lines)
 
+
+def write_dictionary_to_file(abs_filepath, dictionary):
+    import json
+
+    with open(abs_filepath, "w") as convert_file:
+        convert_file.write(json.dumps(dictionary))
+
+
+def write_to_file(abs_filepath, lines):
+    f = open(abs_filepath, "w")
+    for line in lines:
+        f.write(line)
+    f.close()
+
+
+# print(detect_connection_between_two_pins(16, 17))
+abs_output_dir = "/home/name/git/keyboard/Goldtouch_keyboard_driver/output"
+abs_output_dir = ""
+# sample_dictionary = {"Name": "Bob", "Age": 28}
+
+# Get the hardcoded connection settings.
 rows = get_right_keys()
 pin_nrs = get_right_gpio_pin_nrs()
-store_pin_connection_pairs_per_key(rows, pin_nrs)
+
+# Ask user to press keys to get the keyboard wirign connection matrix
+connected_pins_per_key = store_pin_connection_pairs_per_key(rows, pin_nrs)
+
+# Export the keyboard wiring matrix
+export_connected_pins_per_key(abs_output_dir, connected_pins_per_key)

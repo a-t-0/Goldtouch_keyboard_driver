@@ -1,4 +1,4 @@
-# Goldtouch_keyboard_driver
+Goldtouch_keyboard_driver
 Creates Ubuntu driver for usb connection of bluetooth keyboard.
 
 
@@ -14,12 +14,11 @@ INDEX.HTM
 INFO_UF2.TXT
 ```
 5. Download the MicroPython UF2 file from: https://micropython.org/resources/firmware/rp2-pico-20210902-v1.17.uf2
-6. Copy that `.uf2` file into the (root directory of the) usb drive.
-7. 
-8. Then the file should dissapear.
-9. Disconnect the Raspberry Pico.
-10. Reconnect the Raspberry Pico
-6. Install Thonny:
+6. Copy that `.uf2` file into the (root directory of the) usb drive. 
+7. Then the file should dissapear.
+8. Disconnect the Raspberry Pico.
+9. Reconnect the Raspberry Pico
+10. Install Thonny:
 ```
 sudo apt-get install python3-thonny
 ```
