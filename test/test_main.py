@@ -11,7 +11,7 @@ class Test_main(unittest.TestCase):
         super(Test_main, self).__init__(*args, **kwargs)
         self.script_dir = self.get_script_dir()
 
-        self.main = Main(6)
+        self.main = Main()
         print(f"self.main.addTwo(3)={self.main.addTwo(3)}")
 
     # returns the directory of this script regardles of from which level the code is executed
