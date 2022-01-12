@@ -1,6 +1,7 @@
 from machine import Pin
 import time
 
+
 def detect_connection_between_two_pins(left, right):
 
     # Set the output pin to GPIO pin nr 0.

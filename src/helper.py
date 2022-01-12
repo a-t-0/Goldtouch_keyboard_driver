@@ -70,7 +70,7 @@ def get_right_keys():
     rows.append(row_3)
     rows.append(row_4)
     rows.append(row_5)
-    
+
     return rows
 
 
@@ -91,7 +91,16 @@ def store_pin_connection_pairs_per_key(rows, pin_nrs):
     connected_pins_per_key = create_emtpy_pin_connection_matrix_dictionary(rows)
     for row in rows:
         for key in row:
+            ask_user_to_press_pin(key)
             left, right = get_connected_pins_per_key(pin_nrs)
+            connected_pins_per_key[key] = (left, right)
+            print(f"Done, got for key:{key} left={left},right={right}")
+
+
+def ask_user_to_press_pin(key):
+    val = input(f"Please press and hold: {key} untill we say:done.")
+    print(val)
+
 
 def get_connected_pins_per_key(pin_nrs):
     for left in pin_nrs:
