@@ -1,14 +1,10 @@
 # Manages calling functions to determine which wires match which keystroke.
 import random
-from matplotlib import pyplot as plt
-from matplotlib import lines
-import matplotlib.pyplot as plt
 import os, shutil
-import numpy as np
 import shutil
 
 # Import from files
-from helper import *
+from src.helper import *
 
 class Main:
     """ """
