@@ -12,26 +12,24 @@ import shutil
 from machine import Pin, Timer
 
 
-
 class Main:
     """ """
 
     def __init__(self):
         print("hello world")
         self.blink_green_light_on_pico()
-    
+
     def blink_green_light_on_pico(self):
-        led=Pin(25, Pin.OUT)
+        led = Pin(25, Pin.OUT)
         LED_state = True
-        tim= TIMER()
-        tim.init(freq=1,mode=Timer.PERIODIC, callback=tick)
-        
-    def  tick(self,timer):
+        tim = TIMER()
+        tim.init(freq=1, mode=Timer.PERIODIC, callback=tick)
+
+    def tick(self, timer):
         global led, LED_state
-        LED_state= not LED_state
+        LED_state = not LED_state
         led.value(LED_state)
-        
-        
+
     def addTwo(self, x):
         """adds two to the incoming integer and returns the result of the computation.
 

@@ -28,9 +28,7 @@ class Test_main(unittest.TestCase):
 
     def test_duration_of_children(self):
         parent_activity = Activity(
-            description="parent_activity",
-            colour="yellow",
-            root_id=0,
+            description="parent_activity", colour="yellow", root_id=0,
         )
         paralel_child_one = Activity(
             description="paralel_child_one",
@@ -56,11 +54,7 @@ class Test_main(unittest.TestCase):
         self.assertEqual(expected_result, result)
 
     def test_duration_of_children_with_one_in_serie_at_start(self):
-        parent_activity = Activity(
-            description="root",
-            colour="yellow",
-            root_id=0,
-        )
+        parent_activity = Activity(description="root", colour="yellow", root_id=0,)
         paralel_child_one = Activity(
             description="paralel_child_one",
             duration=2,
@@ -86,11 +80,7 @@ class Test_main(unittest.TestCase):
         self.assertEqual(expected_result, result)
 
     def test_duration_of_children_with_one_in_serie_at_end(self):
-        parent_activity = Activity(
-            description="root",
-            colour="yellow",
-            root_id=0,
-        )
+        parent_activity = Activity(description="root", colour="yellow", root_id=0,)
         paralel_child_one = Activity(
             description="",
             duration=2,
@@ -118,11 +108,7 @@ class Test_main(unittest.TestCase):
         )
 
     def test_child_cannot_start_after_parent_is_caught(self):
-        parent_activity = Activity(
-            description="root",
-            colour="yellow",
-            root_id=0,
-        )
+        parent_activity = Activity(description="root", colour="yellow", root_id=0,)
 
         with self.assertRaises(Exception) as context:
             # Call function to compute auto duration
@@ -139,11 +125,7 @@ class Test_main(unittest.TestCase):
         )
 
     def test_duration_of_children_with_grand_child(self):
-        parent_activity = Activity(
-            description="root",
-            colour="yellow",
-            root_id=0,
-        )
+        parent_activity = Activity(description="root", colour="yellow", root_id=0,)
         paralel_child_one = Activity(
             description="paralel_child_one",
             root_id=0,
@@ -174,11 +156,7 @@ class Test_main(unittest.TestCase):
         self.assertEqual(expected_result, result)
 
     def test_duration_of_children_with_grand_child_in_paralel(self):
-        parent_activity = Activity(
-            description="root",
-            colour="yellow",
-            root_id=0,
-        )
+        parent_activity = Activity(description="root", colour="yellow", root_id=0,)
         paralel_child_one = Activity(
             description="paralel_child_one",
             root_id=0,

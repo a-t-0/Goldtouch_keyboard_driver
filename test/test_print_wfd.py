@@ -32,9 +32,7 @@ class Test_main(unittest.TestCase):
         organogram = Activity(
             description="Organogram",
             duration_days=1,
-            relative_start=Relative_start(
-                True,
-            ),
+            relative_start=Relative_start(True,),
             colour="Cyan",
             hourly_wage=40,
         )
@@ -58,9 +56,7 @@ class Test_main(unittest.TestCase):
 
     def test_wfl_lines(self):
         parent_activity = Activity(
-            description="parent_activity",
-            colour="yellow",
-            root_id=0,
+            description="parent_activity", colour="yellow", root_id=0,
         )
         paralel_child_one = Activity(
             description="paralel_child_one",
