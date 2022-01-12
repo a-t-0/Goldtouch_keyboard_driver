@@ -1,5 +1,4 @@
-# Example code that creates plots directly in report
-# Code is an implementation of a genetic algorithm
+# Manages calling functions to determine which wires match which keystroke.
 import random
 from matplotlib import pyplot as plt
 from matplotlib import lines
@@ -8,7 +7,8 @@ import os, shutil
 import numpy as np
 import shutil
 
-
+# Import from files
+from helper import *
 
 class Main:
     """ """

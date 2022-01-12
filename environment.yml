@@ -1,0 +1,18 @@
+# run: conda env create --file environment.yml
+# include new packages: conda env update --file environment.yml
+name: keyboard
+channels:
+  - conda-forge
+  - conda
+dependencies:
+- anaconda
+- nb_conda
+- conda:
+  - pytest
+- pip
+- pip:
+  # works for regular pip packages
+  - testbook
+  - pyment
+  - pdoc3
+  - black
