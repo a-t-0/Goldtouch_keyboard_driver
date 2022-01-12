@@ -3,6 +3,7 @@ import os
 from ..src.Main import Main
 import testbook
 
+from ..src.helper import *
 
 class Test_main(unittest.TestCase):
 
@@ -25,6 +26,31 @@ class Test_main(unittest.TestCase):
         result = self.main.addTwo(5)
         self.assertEqual(expected_result, result)
 
+    def test_create_emtpy_pin_connection_matrix_dictionary(self):
+        rows=[]
+        row_0=["a","b","c"]
+        row_1=["d","e","f"]
+        rows.append(row_0)
+        rows.append(row_1)
+        
+        dictionary=create_emtpy_pin_connection_matrix_dictionary(rows)
+        self.assertEqual(dictionary["a"],None)
+        self.assertEqual(dictionary["b"],None)
+        self.assertEqual(dictionary["c"],None)
+        self.assertEqual(dictionary["d"],None)
+        self.assertEqual(dictionary["e"],None)
+        self.assertEqual(dictionary["f"],None)
+
+    def test_verify_keys(self):
+        rows=get_right_keys()
+        
+        dictionary=create_emtpy_pin_connection_matrix_dictionary(rows)
+        self.assertEqual(dictionary["Spacebar (left half of right bar)"],None)
+        self.assertEqual(dictionary["Spacebar (right half of right bar)"],None)
+        self.assertEqual(dictionary["k"],None)
+        self.assertEqual(dictionary["'"],None)
+        self.assertEqual(dictionary["\\"],None)
+        self.assertEqual(dictionary["/"],None)
 
 if __name__ == "__main__":
     unittest.main()

@@ -64,9 +64,13 @@ def get_right_keys():
         "Right Arrow",
     ]
 
-    rows.append(
-        row_0, row_1, row_2, row_3, row_4, row_5,
-    )
+    rows.append(row_0)
+    rows.append(row_1)
+    rows.append(row_2)
+    rows.append(row_3)
+    rows.append(row_4)
+    rows.append(row_5)
+    
     return rows
 
 
