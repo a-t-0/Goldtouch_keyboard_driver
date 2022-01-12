@@ -74,6 +74,8 @@ class Main:
             if left_to_right_gold_bars_on_top[fpc_slot_index] in used:
                 used_fpc_slots.append(fpc_slot_index)
         print(f"used_fpc_slots={used_fpc_slots}")
+        print(f"nr_of_slots={len(used_fpc_slots)}")
+        # used_fpc_slots=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
     def blink_green_light_on_pico(self):
         led = Pin(25, Pin.OUT)
