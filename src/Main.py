@@ -76,6 +76,7 @@ class Main:
         print(f"used_fpc_slots={used_fpc_slots}")
         print(f"nr_of_slots={len(used_fpc_slots)}")
         # used_fpc_slots=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+        return used_fpc_slots
 
     def blink_green_light_on_pico(self):
         led = Pin(25, Pin.OUT)
