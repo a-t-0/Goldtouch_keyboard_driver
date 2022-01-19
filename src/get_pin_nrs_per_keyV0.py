@@ -77,6 +77,86 @@ def get_right_keys():
     return rows
 
 
+def get_left_keys():
+
+    # Start at top left. Go Western reading, first left to right, then top to bottom
+    rows = []
+    row_0 = [
+        "Esc",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+    ]
+
+    row_1 = [
+        "Home",
+        "`",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+    ]
+
+    row_2 = [
+        "PageUp",
+        "Tab (Left)",
+        "Tab (Right)",
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "",
+    ]
+
+    row_3 = [
+        "PageDown",
+        "Caps Lock(Left)",
+        "Caps Lock(Right)",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+    ]
+
+    row_4 = [
+        "End",
+        "Shift (Left)",
+        "Shift (Right)",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+    ]
+
+    row_5 = [
+        "Fn",
+        "Ctrl (Left)",
+        "Ctrl (Right)",
+        "Start",
+        "Alt",
+        "Space Left",
+        "Space Middle",
+        "Space Right",
+    ]
+    rows.append(row_0)
+    rows.append(row_1)
+    rows.append(row_2)
+    rows.append(row_3)
+    rows.append(row_4)
+    rows.append(row_5)
+
+    return rows
+
+
 def get_right_gpio_pin_nrs():
     # pin_nrs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     # pin_nrs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17,18,19]
