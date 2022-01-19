@@ -251,12 +251,12 @@ def detect_connection_between_two_pins(left, right):
     return False
 
 
-def export_connected_pins_per_key(abs_output_dir, connected_pins_per_key):
-    write_dictionary_to_file(f"{abs_output_dir}/dictionary.txt", connected_pins_per_key)
+def export_connected_pins_per_key(abs_output_dir, filename, connected_pins_per_key):
+    write_dictionary_to_file(f"{abs_output_dir}/{filename}", connected_pins_per_key)
     lines = []
     for key, value in connected_pins_per_key.items():
         lines.append("%s:%s\n" % (key, value))
-    write_to_file(f"{abs_output_dir}/lines.txt", lines)
+    write_to_file(f"{abs_output_dir}/{filename}", lines)
 
 
 def write_dictionary_to_file(abs_filepath, dictionary):
@@ -279,11 +279,19 @@ abs_output_dir = ""
 # sample_dictionary = {"Name": "Bob", "Age": 28}
 
 # Get the hardcoded connection settings.
-rows = get_right_keys()
+right_rows = get_right_keys()
+left_rows = get_left_keys()
 pin_nrs = get_right_gpio_pin_nrs()
 
 # Ask user to press keys to get the keyboard wirign connection matrix
-connected_pins_per_key = store_pin_connection_pairs_per_key(rows, pin_nrs)
-
+connected_pins_per_key_left = store_pin_connection_pairs_per_key(left_rows, pin_nrs)
 # Export the keyboard wiring matrix
-export_connected_pins_per_key(abs_output_dir, connected_pins_per_key)
+export_connected_pins_per_key(
+    abs_output_dir, "left_dictionary.txt", connected_pins_per_key_left
+)
+connected_pins_per_key_right = store_pin_connection_pairs_per_key(right_rows, pin_nrs)
+
+
+export_connected_pins_per_key(
+    abs_output_dir, "right_dictionary.txt", connected_pins_per_key_right
+)
