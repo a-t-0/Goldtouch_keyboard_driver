@@ -112,7 +112,6 @@ def get_left_keys():
         "E",
         "R",
         "T",
-        "",
     ]
 
     row_3 = [
@@ -157,6 +156,32 @@ def get_left_keys():
     return rows
 
 
+def get_gpio_columns():
+    gpio_columns = [0, 1, 2, 3, 4, 5, 6, 7]
+    return gpio_columns
+
+
+def get_gpio_left_rows():
+    gpio_left_rows = [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        26,
+        27,
+        28,
+    ]
+    return gpio_left_rows
+
+
+def get_gpio_right_rows():
+    gpio_right_rows = [8, 9, 10, 11, 12, 13, 14, 15]
+    return gpio_right_rows
+
+
 def get_right_gpio_pin_nrs():
     # pin_nrs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     # pin_nrs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17,18,19]
@@ -199,12 +224,16 @@ def create_emtpy_pin_connection_matrix_dictionary(rows):
     return connected_pins_per_key
 
 
-def store_pin_connection_pairs_per_key(rows, pin_nrs):
+def store_pin_connection_pairs_per_key(
+    rows, gpio_columns, gpio_left_rows, gpio_right_rows
+):
     connected_pins_per_key = create_emtpy_pin_connection_matrix_dictionary(rows)
     for row in rows:
         for key in row:
             ask_user_to_press_pin(key)
-            left, right = get_connected_pins_per_key(pin_nrs)
+            left, right = get_connected_pins_per_key(
+                gpio_columns, gpio_left_rows, gpio_right_rows
+            )
             connected_pins_per_key[key] = (left, right)
             if not left is None and not right is None:
                 print(f"Done, got for key:{key} left={left},right={right}")
@@ -219,15 +248,22 @@ def ask_user_to_press_pin(key):
     print(val)
 
 
-def get_connected_pins_per_key(pin_nrs):
-    for left in pin_nrs:
-        for right in pin_nrs:
-            if left != right:
-                # print(f'test left={left},right={right}')
-                has_connection = detect_connection_between_two_pins(left, right)
-                # print(f"has_connection={has_connection}")
-                if has_connection:
-                    return left, right
+def get_connected_pins_per_key(gpio_columns, gpio_left_rows, gpio_right_rows):
+    # TODO: update this to loop through the gpio columns, and then
+    # loop through rows. However, store combinations as (row, column)
+    # instead of column, row.
+    for gpio_column in gpio_columns:
+
+        # Loop through the left hand columns
+        for gpio_left_row in gpio_left_rows:
+            if detect_connection_between_two_pins(gpio_left_row, gpio_column):
+                return (gpio_left_row, gpio_column)
+
+        # Loop through the right hand columns
+        for gpio_right_row in gpio_right_rows:
+            if detect_connection_between_two_pins(gpio_right_row, gpio_column):
+                return (gpio_right_row, gpio_column)
+
     return None, None
 
 
@@ -278,18 +314,27 @@ abs_output_dir = "/home/name/git/keyboard/Goldtouch_keyboard_driver/output"
 abs_output_dir = ""
 # sample_dictionary = {"Name": "Bob", "Age": 28}
 
+
 # Get the hardcoded connection settings.
 right_rows = get_right_keys()
 left_rows = get_left_keys()
+gpio_columns = get_gpio_columns()
+gpio_left_rows = get_gpio_left_rows()
+gpio_right_rows = get_gpio_right_rows()
 pin_nrs = get_right_gpio_pin_nrs()
 
+
 # Ask user to press keys to get the keyboard wirign connection matrix
-connected_pins_per_key_left = store_pin_connection_pairs_per_key(left_rows, pin_nrs)
+connected_pins_per_key_left = store_pin_connection_pairs_per_key(
+    left_rows, gpio_columns, gpio_left_rows, gpio_right_rows
+)
 # Export the keyboard wiring matrix
 export_connected_pins_per_key(
     abs_output_dir, "left_dictionary.txt", connected_pins_per_key_left
 )
-connected_pins_per_key_right = store_pin_connection_pairs_per_key(right_rows, pin_nrs)
+connected_pins_per_key_right = store_pin_connection_pairs_per_key(
+    right_rows, gpio_columns, gpio_left_rows, gpio_right_rows
+)
 
 
 export_connected_pins_per_key(
