@@ -106,6 +106,7 @@ def send_key_down(dictionary, button):
 
 def send_key_up(dictionary, key):
     print(f"releasing:{key}")
+    # TODO: copy code of key down.
 
 
 def read_dictionary_from_file(abs_output_dir, filename):
