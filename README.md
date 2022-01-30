@@ -1,5 +1,60 @@
-# Goldtouch_keyboard_driver
+## Goldtouch keyboard driver
 Creates Ubuntu driver for usb connection of bluetooth keyboard.
+
+
+## Pico Instructions
+Source: https://www.youtube.com/watch?v=zlKJ5hvfs6s Time: 04:30 seconds
+0. Connect usb into Pico (not into pc yet).
+1. Boot up pc.
+2. Hold the `BOOTSEL` button while you plug in the Pico USB into the computer.
+3. That should create a drive of the Raspberry PICO. (In this case `CIRCUITPY`).
+4. The first time you use it, it should show files:
+```
+INDEX.HTM
+INFO_UF2.TXT
+```
+5. Download the MicroPython UF2 file from: https://micropython.org/resources/firmware/rp2-pico-20210902-v1.17.uf2
+6. Copy that `.uf2` file into the (root directory of the) usb drive. 
+7. Then the file should dissapear.
+8. Disconnect the Raspberry Pico.
+9. Reconnect the Raspberry Pico
+10. Install Thonny:
+```
+yes | sudo apt install python3-pip
+pip3 install thonny
+yes | sudo apt-get install python3-tk
+sudo usermod -a -G dialout <username>
+sudo usermod -a -G dialout $(whoami)
+reboot -n
+```
+Which yields warning:
+> WARNING: The scripts isort and isort-identify-imports are installed in '/home/name/.local/bin' which is not on PATH.
+Which could be resolved with: (add it to path).
+11. Then run Thonny with:
+```
+cd /home/name/.local/bin
+./thonny
+```
+12. In the bottom right of Thonny, it may say: `Python 3.xx`, and you should click on it and then select:
+```
+MicroPython (Raspberry Pi Pico)
+```
+13. Then the terminal in Thonny should show: `MicroPython v1.xx..`.
+14. Install `RPi.gpio` in Thonny by using: `Tools>Manage Plug-ins>Search for:`
+```
+RPi.GPIO
+```
+Ensure that package is found, then manually click: `Install`.
+15. Close Thonny. Restart Thonny with sudo:
+```
+cd /home/name/.local/bin
+./thonny
+``` 
+9. Then Create a new file named `hello_world.py` with content:
+```
+print(f"Hello World")
+```
+10. Store that file in: the Pico by clicking the `RUN` button.
 
 
 ## TL;DR
