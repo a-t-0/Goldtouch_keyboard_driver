@@ -8,64 +8,138 @@ def get_right_keys():
     # Start at top left. Go Western reading, first left to right, then top to bottom
     rows = []
     row_0 = [
-        "f8",
-        "f9",
-        "f10",
-        "f11",
-        "f12",
-        "ScrlLk",
-        "Insert",
-        "Delete",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12",
+        "SCROLL_LOCK",
+        "INSERT",
+        "DELETE",
     ]
     row_1 = [
         "7",
         "8",
         "9",
-        "10",
-        "-",
-        "=",
-        "Backspace (left half)",
-        "Backspace (right half)",
+        "0",
+        "MINUS",
+        "EQUAL",
+        "BACKSPACE",
+        "BSPC",
     ]
     row_2 = [
-        "y",
-        "u",
-        "i",
-        "o",
-        "p",
-        "[",
-        "]",
-        "\\",
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P",
+        "LBRACKET",
+        "RBRACKET",
+        "BACKSLASH",
     ]
     row_3 = [
-        "h",
-        "j",
-        "k",
-        "l",
-        ";",
-        "'",
-        "Enter (left half)",
-        "Enter (right half)",
+        "H",
+        "J",
+        "K",
+        "L",
+        "SEMICOLON",
+        "QUOTE",
+        "ENTER",
+        "ENT",
     ]
     row_4 = [
-        "n",
+        "N",
         "m",
-        ",",
-        ".",
-        "/",
-        "Shift",
-        "Up arrow",
-        "Print Scrn",
+        "COMMA",
+        "DOT",
+        "SLASH",
+        "RIGHT_SHIFT",
+        "UP",
+        "PRINT_SCREEN",
     ]
     row_5 = [
-        "Spacebar (left half of right bar)",
-        "Spacebar (right half of right bar)",
-        "alt",
-        "Start",
-        "Ctrl",
-        "Left arrow",
-        "Down Arrow",
-        "Right Arrow",
+        "SPACE",
+        "SPC",
+        "RIGHT_ALT",
+        "RIGHT_SUPER",
+        "RIGHT_CONTROL",
+        "LEFT",
+        "DOWN",
+        "UP",
+    ]
+
+    rows.append(row_0)
+    rows.append(row_1)
+    rows.append(row_2)
+    rows.append(row_3)
+    rows.append(row_4)
+    rows.append(row_5)
+
+    return rows
+
+def get_left_keys():
+
+    # Start at top left. Go Western reading, first left to right, then top to bottom
+    rows = []
+    row_0 = [
+        "ESCAPE",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+    ]
+    row_1 = [
+        "HOME",
+        "GRAVE",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+    ]
+    row_2 = [
+        "PGUP",
+        "TAB",
+        "TAB",
+        "Q",
+        "W",
+        "R",
+        "R",
+        "T",
+    ]
+    row_3 = [
+        "PGDOWN",
+        "CAPS_LOCK",
+        "CAPSLOCK",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+    ]
+    row_4 = [
+        "END",
+        "LEFT_SHIFT",
+        "LSHIFT",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+    ]
+    row_5 = [
+        "N1",
+        "LEFT_CONTROL",
+        "LCTRL",
+        "LEFT_SUPER",
+        "LEFT_ALT",
+        "SPACE",
+        "SPC",
+        "SPACE",
     ]
 
     rows.append(row_0)
@@ -267,12 +341,14 @@ def pin_to_board_pin(pin_nr):
         raise Exception(f"No  pin found for: pin_nr={pin_nr}.")
     
 
-def export_connected_pins_per_key(abs_output_dir, connected_pins_per_key):
-    write_dictionary_to_file(f"{abs_output_dir}/dictionary.txt", connected_pins_per_key)
-    lines = []
-    for key, value in connected_pins_per_key.items():
-        lines.append("%s:%s\n" % (key, value))
-    write_to_file(f"{abs_output_dir}/lines.txt", lines)
+def export_connected_pins_per_key(abs_output_dir,filename,connected_pins_per_key):
+    filepath=f"{abs_output_dir}/{filename}"
+    print(f'filepath={filepath}')
+    write_dictionary_to_file(f"{abs_output_dir}/{filename}", connected_pins_per_key)
+    #lines = []
+    #for key, value in connected_pins_per_key.items():
+    #    lines.append("%s:%s\n" % (key, value))
+    #write_to_file(f"{abs_output_dir}/lines.txt", lines)
 
 
 def write_dictionary_to_file(abs_filepath, dictionary):
@@ -289,18 +365,29 @@ def write_to_file(abs_filepath, lines):
     f.close()
 
 
+def get_key_connection_dictionary(abs_output_dir,filename,keys):
+    # Get the hardcoded connection settings.
+    
+    pin_nrs = get_right_gpio_pin_nrs()
+    
+    # Get the circuitpython pins:
+    # Ask user to press keys to get the keyboard wirign connection matrix
+    connected_pins_per_key = store_pin_connection_pairs_per_key(keys, pin_nrs)
+    
+    # Export the keyboard wiring matrix
+    #export_connected_pins_per_key(abs_output_dir,filename, connected_pins_per_key)
+    
+    return connected_pins_per_key
+
+
 # print(detect_connection_between_two_pins(16, 17))
-abs_output_dir = "/home/name/git/keyboard/Goldtouch_keyboard_driver/output"
+abs_output_dir = "/home/name/git/Goldtouch_keyboard_driver/output"
 abs_output_dir = ""
+left_filename="left_dictionary.txt"
+right_filename="right_dictionary.txt"
 # sample_dictionary = {"Name": "Bob", "Age": 28}
 
-# Get the hardcoded connection settings.
-rows = get_right_keys()
-pin_nrs = get_right_gpio_pin_nrs()
-
-# Get the circuitpython pins:
-# Ask user to press keys to get the keyboard wirign connection matrix
-connected_pins_per_key = store_pin_connection_pairs_per_key(rows, pin_nrs)
-
-# Export the keyboard wiring matrix
-export_connected_pins_per_key(abs_output_dir, connected_pins_per_key)
+right_keys = get_right_keys()
+left_keys = get_left_keys()
+left_dic=get_key_connection_dictionary(abs_output_dir,left_filename,right_keys)
+right_dic= get_key_connection_dictionary(abs_output_dir,right_filename,left_keys)
