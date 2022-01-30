@@ -338,7 +338,6 @@ def detect_connection_between_two_pins_circuitpythonV5(left, right,circuitpython
         return True
     #row.value = 0
     out.deinit()
-    input.deinit()
     return False
 
 
