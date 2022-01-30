@@ -109,6 +109,12 @@ def get_right_gpio_pin_nrs():
     ]
     return pin_nrs
 
+def get_index_of_pin_nr(pin_nr):
+    # TODO: this mapping can be created once instead of for every key.
+    pin_nrs=get_right_gpio_pin_nrs()
+    for i in range(len(pin_nrs)):
+        if pin_nrs[i] == pin_nr:
+            return i
 
 def create_emtpy_pin_connection_matrix_dictionary(rows):
     connected_pins_per_key = {}
@@ -118,12 +124,12 @@ def create_emtpy_pin_connection_matrix_dictionary(rows):
     return connected_pins_per_key
 
 
-def store_pin_connection_pairs_per_key(rows, pin_nrs):
+def store_pin_connection_pairs_per_key(rows, pin_nrs,circuitpython_pins=None):
     connected_pins_per_key = create_emtpy_pin_connection_matrix_dictionary(rows)
     for row in rows:
         for key in row:
             ask_user_to_press_pin(key)
-            left, right = get_connected_pins_per_key(pin_nrs)
+            left, right = get_connected_pins_per_key(pin_nrs,circuitpython_pins)
             connected_pins_per_key[key] = (left, right)
             if not left is None and not right is None:
                 print(f"Done, got for key:{key} left={left},right={right}")
@@ -138,12 +144,13 @@ def ask_user_to_press_pin(key):
     print(val)
 
 
-def get_connected_pins_per_key(pin_nrs):
+def get_connected_pins_per_key(pin_nrs,circuitpython_pins=None):
     for left in pin_nrs:
         for right in pin_nrs:
             if left != right:
                 # print(f'test left={left},right={right}')
                 #has_connection = detect_connection_between_two_pins(left, right)
+                #has_connection = detect_connection_between_two_pins_circuitpythonV0(left, right,circuitpython_pins)
                 has_connection = detect_connection_between_two_pins_circuitpython(left, right)
                 
                 # print(f"has_connection={has_connection}")
@@ -176,52 +183,63 @@ def detect_connection_between_two_pins_micropython(left, right):
 def detect_connection_between_two_pins_circuitpython(left, right):
     # Import for circuitpython.
     import board 
-    import digitalio  
-    #import RPi.GPIO pi only
+    import digitalio
+    print(f'left={left},right={right}')
     
     left_pin=get_circuitpython_gpio_pin(board,left)
     right_pin=get_circuitpython_gpio_pin(board,right)
     # Set the output pin to GPIO pin nr 0.
-    #output_line = Pin(left, Pin.OUT)
-    
-    try:
-        output_line = digitalio.DigitalInOut(left_pin)
-        output_line.direction=digitalio.Direction.OUTPUT
-    except:
-        pass
+    output_line = digitalio.DigitalInOut(left_pin)
+    output_line.direction=digitalio.Direction.OUTPUT
+
     # Set the input pin to GPIO pin nr 1.
-    #input_line = Pin(right, Pin.IN, Pin.PULL_DOWN)
-    
-    try:
-        input_line = digitalio.DigitalInOut(right_pin)
-        input_line.direction=digitalio.Direction.INPUT
-    except:
-        pass
-        
+    input_line = digitalio.DigitalInOut(right_pin)
+    input_line.direction=digitalio.Direction.INPUT
+
     # Put voltage/value of 1 [-] on GPIO pin 0.
-    #output_line.value(1)
     output_line.value = 1
 
-    # Check if the input has an incoming value.
-    # for i in range(0,10):
-    #    time.sleep(0.01)
-    #if input_line.value():
     if input_line.value == 1:
-        output_line.value = 1
-        #RPi.GPIO.cleanup()
-        #output_line.low()
-        ##output_line.direction=None
+        print(f'input_line.value={input_line.value}')
+        output_line.value = 0
+        print(f'input_line.value={input_line.value}')
+        #output_line.direction=None
         #output_line=None
-        ##input_line.direction=None
+        #input_line.direction=None
         #input_line=None
+        input_line.deinit()
+        output_line.deinit()
         return True
     # print(f"{left},{right}")
     #output_line.direction=None
     #output_line=None
     #input_line.direction=None
     #input_line=None
-    output_line.value = 1
+    output_line.value = 0
+    input_line.deinit()
+    output_line.deinit()
     return False
+
+def detect_connection_between_two_pins_circuitpythonV0(left, right,circuitpython_pins):
+    
+    row_nr=get_index_of_pin_nr(left)
+    col_nr=get_index_of_pin_nr(right)
+    print(f'{left}row_nr={row_nr}, {right}col_nr={col_nr}')
+    row=circuitpython_pins[row_nr]
+    #print(f'row={row}')
+    column=circuitpython_pins[col_nr]
+    print(f'column={column}')
+    
+    row.value = 1
+
+    # Check if the input has an incoming value.
+    if column.value == 1:
+        row.value = 0
+        return True
+    row.value = 0
+    return False
+
+
 
 def generate_circuitpython_gpio_pins(board):
     circuitpython_gpio_pins= [
@@ -259,12 +277,12 @@ def generate_circuitpython_gpio_pins(board):
 
 def generate_rows_circuitpython(board,circuitpython_gpio_pins, digitalio):
     output_lines=[]
-    for row in range(0,7):
+    for row in range(0,8):
         left_pin=get_circuitpython_gpio_pin(board,row)
         output_line = digitalio.DigitalInOut(left_pin)
         output_line.direction=digitalio.Direction.OUTPUT
         output_lines.append(output_line)
-        print(f'row={row}')
+        #print(f'row={row}')
     return output_lines
 
 def generate_columns_circuitpython(board,circuitpython_gpio_pins):
@@ -274,7 +292,7 @@ def generate_columns_circuitpython(board,circuitpython_gpio_pins):
         input_line = digitalio.DigitalInOut(right_pin)
         input_line.direction=digitalio.Direction.INPUT
         input_lines.append(input_line)
-        print(f'column={column}')
+        #print(f'column={column}')
     return input_lines
 
 def get_circuitpython_gpio_pin(board,gpio_pin_nr):
@@ -344,20 +362,16 @@ rows = get_right_keys()
 pin_nrs = get_right_gpio_pin_nrs()
 
 # Get the circuitpython pins:
-import board # circuitpython only
-import digitalio # circuitpython only
-circuitpython_gpio_pins=generate_circuitpython_gpio_pins(board)
-circuitpython_pins=generate_rows_circuitpython(board,circuitpython_gpio_pins,digitalio)
+circuitpython_pins=None
+##import board # circuitpython only
+##import digitalio # circuitpython only
+##circuitpython_gpio_pins=generate_circuitpython_gpio_pins(board)
+##circuitpython_pins=generate_rows_circuitpython(board,circuitpython_gpio_pins,digitalio)
+##circuitpython_pins.extend(generate_columns_circuitpython(board,circuitpython_gpio_pins))
 
 
 # Ask user to press keys to get the keyboard wirign connection matrix
-connected_pins_per_key = store_pin_connection_pairs_per_key(rows, pin_nrs)
+connected_pins_per_key = store_pin_connection_pairs_per_key(rows, pin_nrs,circuitpython_pins)
 
 # Export the keyboard wiring matrix
 export_connected_pins_per_key(abs_output_dir, connected_pins_per_key)
-
-
-
-
-
-
