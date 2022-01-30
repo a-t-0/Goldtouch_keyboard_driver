@@ -108,24 +108,26 @@ def replace_dic_key(left_dic, right_dic, new_key, old_key):
     return left_dic, right_dic
 
 
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "LCTRL")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "ENT")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "LEFT_SHIFT")
-left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N1", "ASTERISK")# causes pystack exausted
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
-#left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "LCTRL")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "ENT")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "LEFT_SHIFT")
+left_dic, right_dic = replace_dic_key(
+    left_dic, right_dic, "N1", "ASTERISK"
+)  # causes pystack exausted
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
+# left_dic, right_dic = replace_dic_key(left_dic, right_dic, "N0", "")
 
 # filler="'____'"
 filler = "____"
@@ -200,11 +202,13 @@ print(line)
 
 # Generate key matrix
 for row in range(0, rows):
-   for col in range(0,columns):
-       gp_row=get_rows()[row]
-       gp_col=get_columns()[col]
-       #print(f"row={row},gp_row={gp_row},col={col},gp_col={gp_col}")
-       matrix[col][row]=get_matrix_element(row,right_gpios[col],left_dic,right_dic,filler)
+    for col in range(0, columns):
+        gp_row = get_rows()[row]
+        gp_col = get_columns()[col]
+        # print(f"row={row},gp_row={gp_row},col={col},gp_col={gp_col}")
+        matrix[col][row] = get_matrix_element(
+            row, right_gpios[col], left_dic, right_dic, filler
+        )
 
 # Output copyable matrix python code
 print(matrix)
@@ -227,12 +231,12 @@ for row in range(0, rows):
     print(line)
 print("    ]")
 print("]")
-# for key, value in a_dict.items():
-#    print(key, '->', value)
 
-#print rotated key matrix
+# print rotated key matrix
 print("")
-print("")
+print(
+    "Note this contains an unexplainable slash after 8-ish elements. Also, it has the incorrect rotation."
+)
 print("keyboard.keymap = [")
 print("    [")
 for col in range(0, columns):
@@ -241,9 +245,7 @@ for col in range(0, columns):
             element = matrix[col][row]
         else:
             element = f"KC.{matrix[col][row]}"
-        line = f"{line}{element},"        
+        line = f"{line}{element},"
 print(line)
 print("    ]")
 print("]")
-# for key, value in a_dict.items():
-#    print(key, '->', value)

@@ -13,17 +13,18 @@ Source: https://www.youtube.com/watch?v=zlKJ5hvfs6s Time: 04:30 seconds
 INDEX.HTM
 INFO_UF2.TXT
 ```
-5. Download the MicroPython UF2 file from: https://micropython.org/resources/firmware/rp2-pico-20210902-v1.17.uf2
-6. Copy that `.uf2` file into the (root directory of the) usb drive. 
+5. DON't Download the MicroPython UF2 file from: https://micropython.org/resources/firmware/rp2-pico-20210902-v1.17.uf2
+5. Instead, download the Circuitpython UF2 file from: https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython 
+leading to https://circuitpython.org/board/raspberry_pi_pico/
+6. Copy that `.uf2` file into the (root directory of the) usb drive (once it is connected).
 7. Then the file should dissapear.
 8. Disconnect the Raspberry Pico.
-9. Reconnect the Raspberry Pico
+9. Reconnect the Raspberry Pico (It should briefly re-appear as circuitpython, or at least in thonny you should be able to find it as such)
 10. Install Thonny:
 ```
 yes | sudo apt install python3-pip
 pip3 install thonny
 yes | sudo apt-get install python3-tk
-sudo usermod -a -G dialout <username>
 sudo usermod -a -G dialout $(whoami)
 reboot -n
 ```
@@ -37,27 +38,50 @@ cd /home/name/.local/bin
 ```
 12. In the bottom right of Thonny, it may say: `Python 3.xx`, and you should click on it and then select:
 ```
-MicroPython (Raspberry Pi Pico)
+Circuitpython (Generic)
 ```
-13. Then the terminal in Thonny should show: `MicroPython v1.xx..`.
-14. Install `RPi.gpio` in Thonny by using: `Tools>Manage Plug-ins>Search for:`
+13. Then the terminal in Thonny should show: `Adafruit CircuitPython 7.1.1 on 2022-01-14; Raspberry Pi Pico with rp2040`.
+14. Don't Install `RPi.gpio` in Thonny by using: `Tools>Manage Plug-ins>Search for:`
 ```
 RPi.GPIO
 ```
-Ensure that package is found, then manually click: `Install`.
+Don't ensure that package is found, then don't manually click: `Install`.
 15. Close Thonny. Restart Thonny with sudo:
 ```
 cd /home/name/.local/bin
 ./thonny
-``` 
+```
 9. Then Create a new file named `hello_world.py` with content:
 ```
 print(f"Hello World")
 ```
 10. Store that file in: the Pico by clicking the `RUN` button.
 
-
 ## TL;DR
+0. Copy `Goldtouch_keyboard_driver/src/circuitpython/get_key_gpio_relations.py` into the Pico with OS CircuitPython in Thonny.
+0. Copy `Goldtouch_keyboard_driver/src/circuitpython/__main__.py` into the Pico with OS CircuitPython in Thonny.
+2. Open `Goldtouch_keyboard_driver/src/circuitpython/get_key_gpio_relations.py` in thonny and run it with: `F5`. Follow the instructions.
+3. Copy the two dictionaries that you are shown into `right_dictionary` and `left_dictionary`  of  `src/dictionaries_2_key_matrix.py`.
+4. Run that `src/dictionaries_2_key_matrix.py` (on your computer, doesn't have to go through thonny.
+5. Copy the keyboard matrix/keymap:
+```
+keyboard.keymap = [
+    [
+        KC.N0,KC.N0,KC.LEFT,KC.SPACE,KC.N0,KC.SCROLL_LOCK,KC.RIGHT_CONTROL,KC.N0,KC.N3,KC.N0,KC.B,KC.F3,KC.C,KC.D,KC.E,KC.F2,\
+        KC.N0,KC.N0,KC.RIGHT,KC.PRINT_SCREEN,KC.F12,KC.INSERT,KC.N0,KC.RIGHT_ALT,KC.N2,KC.T,KC.S,KC.W,KC.X,KC.N0,KC.CAPSLOCK,KC.F1,\
+        KC.RIGHT_SUPER,KC.N0,KC.BACKSPACE,KC.N0,KC.F10,KC.F9,KC.N0,KC.N0,KC.N1,KC.N0,KC.N0,KC.LEFT_SHIFT,KC.N0,KC.N0,KC.SPC,KC.N0,\
+        KC.N0,KC.RIGHT_SHIFT,KC.DOWN,KC.ENT,KC.F11,KC.DELETE,KC.N0,KC.N0,KC.N4,KC.N0,KC.N0,KC.N6,KC.V,KC.F,KC.R,KC.N5,\
+        KC.LBRACKET,KC.SEMICOLON,KC.SLASH,KC.P,KC.N0,KC.MINUS,KC.N0,KC.QUOTE,KC.PGUP,KC.N0,KC.LEFT_SUPER,KC.N0,KC.N0,KC.N0,KC.F5,KC.G,\
+        KC.Y,KC.H,KC.N,KC.U,KC.N7,KC.N0,KC.M,KC.J,KC.PGDOWN,KC.N0,KC.N0,KC.N0,KC.LEFT_ALT,KC.N0,KC.F7,KC.F4,\
+        KC.RBRACKET,KC.BACKSLASH,KC.N0,KC.I,KC.N8,KC.EQUAL,KC.COMMA,KC.K,KC.N0,KC.N0,KC.ESCAPE,KC.TAB,KC.Z,KC.A,KC.Q,KC.GRAVE,\
+        KC.N0,KC.N0,KC.UP,KC.O,KC.N9,KC.F8,KC.DOT,KC.L,KC.N0,KC.N0,KC.N0,KC.N0,KC.N0,KC.N0,KC.N0,KC.N0,\
+    ]
+]
+```
+into `__main__.py` in the pico in Thonny.
+6. That's it, now to start the keyboard, open Thonny and run the `__main__.py` by opening it and pressing `F5`.
+
+## TL;DR old
 This repo converts a `.pcapng` file into its original keystrokes. For example, you can record the data that flows between your computer and keyboard by recording your USB port traffic with Wireshark. You can store that data as a `abcd.pcapng` file (e.g. I pressed `abcd` during that recording). Next the `parse_pcapng.py` converts that `abcd.pcapng` file into its original keystrokes. Run it with:
 ```
 python parse_pcapng.py
