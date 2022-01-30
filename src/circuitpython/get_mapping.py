@@ -65,7 +65,7 @@ def get_right_keys():
         "RIGHT_CONTROL",
         "LEFT",
         "DOWN",
-        "UP",
+        "RIGHT",
     ]
 
     rows.append(row_0)
@@ -107,7 +107,7 @@ def get_left_keys():
         "TAB",
         "Q",
         "W",
-        "R",
+        "E",
         "R",
         "T",
     ]
@@ -132,7 +132,7 @@ def get_left_keys():
         "B",
     ]
     row_5 = [
-        "N1",
+        "ASTERISK",
         "LEFT_CONTROL",
         "LCTRL",
         "LEFT_SUPER",
