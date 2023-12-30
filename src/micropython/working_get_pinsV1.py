@@ -135,7 +135,7 @@ def store_pin_connection_pairs_per_key(rows, pin_nrs):
 
 
 def ask_user_to_press_pin(key):
-    val = input(f"Please press and hold: {key} untill we say:done.")
+    val = input(f"Please press and hold: {key} untill we say:done. (Or enter to skip)")
     print(val)
 
 
