@@ -1,3 +1,9 @@
+"""Store the key layout for the keyboard.
+
+Assumes a split keyboard.
+"""
+
+
 def get_right_keys():
     """Start at top left.
 

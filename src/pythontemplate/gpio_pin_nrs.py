@@ -1,4 +1,8 @@
+"""Stores a list of all GPIO pin numbers of the Raspberry Pi Pico."""
+
+
 def get_pico_gpio_pin_nrs():
+    """Returns a list of all GPIO pin numbers of the Raspberry Pi Pico."""
     pin_nrs = [
         0,
         1,
@@ -31,6 +35,9 @@ def get_pico_gpio_pin_nrs():
 
 
 def create_emtpy_pin_connection_matrix_dictionary(rows):
+    """Creates an empty dictionary to store a tuple of two integers
+    representing the two GPIO pin numbers on the Raspberry Pico, for each key
+    in the keyboard matrix."""
     connected_pins_per_key = {}
     for row in rows:
         for key in row:
