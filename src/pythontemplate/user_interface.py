@@ -22,3 +22,16 @@ def print_matrix(connected_pins_per_key, rows):
         print(new_line)
         # print("")
     return connected_pins_per_key
+
+
+def ask_user_to_get_left_or_right_half(half):
+    """Ask the user to press the left or right half of the keyboard."""
+    get_half = input(
+        f"Do you want to get the connection matrix for the {half} half? (y/n)"
+    )
+    if get_half == "y":
+        return True
+    if get_half == "n":
+        return False
+    print("Please enter y or n")
+    return ask_user_to_get_left_or_right_half(half)

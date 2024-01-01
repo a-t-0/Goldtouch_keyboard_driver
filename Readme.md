@@ -159,9 +159,12 @@ RPi.GPIO
 Then you have to probably restart thonny to enable it to use the recently
 installed library.
 
-## Running get_key_gpio_mapping.py for RHS
+## Check all keys work
 
-Below is the matrix for the keys and the respective GPIO pins on the Pico.
+Open a terminal, type `thonny`, in `thonny` open `__main__.py`, run it and say
+`y` to the half you want to get.
+This asks you to press the keys, then it scans all GPIO ports on the Raspberry
+Pico, and determines which two GPIO pins connect which key on the keyboard.
 
 ### Key-Pico GPIO pin matrix RHS:
 
@@ -246,10 +249,7 @@ This describes how the left-hand side is wired.
 
 ## TODO:
 
-- create separate function/file that takes in the wiring and key-pin relations to tell the user which wire is not connected properly if a keyboard button does not work.
-- rewrite get_mapping_V2 such that it also automatically outputs which wire is not connected properly, if there is any wire not connected properly.
-- Create a dictionary output method for the keyboard matrices. (Prompt user for y/n to ask if user wants to export)
-- Give user option to specify left/right keyboard half.
+- [x] Give user option to specify left/right keyboard half.
 - Write a driver for the keyboard.
 - Make the driver start at boot.
 - Clean up the repo.
