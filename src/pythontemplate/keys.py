@@ -1,8 +1,8 @@
-import time
-
 def get_right_keys():
+    """Start at top left.
 
-    # Start at top left. Go Western reading, first left to right, then top to bottom
+    Go Western reading, first left to right, then top to bottom.
+    """
     rows = []
     row_0 = [
         "F8",
@@ -74,9 +74,12 @@ def get_right_keys():
 
     return rows
 
-def get_left_keys():
 
-    # Start at top left. Go Western reading, first left to right, then top to bottom
+def get_left_keys():
+    """Start at top left.
+
+    Go Western reading, first left to right, then top to # bottom.
+    """
     rows = []
     row_0 = [
         "ESCAPE",
