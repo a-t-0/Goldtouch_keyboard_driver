@@ -193,7 +193,12 @@ This describes how the right-hand side is wired.
 2-purple-4
 3-red-5
 4-yellow-6
-5-white-7
+5-white-7# TODO: Create a dictionary output method for the keyboard matrices. (Prompt
+
+# user for y/n to ask if user wants to export) and verify you can read
+
+# it in again.
+
 6-green-8
 7-orange-9
 8-white-10

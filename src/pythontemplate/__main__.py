@@ -1,6 +1,7 @@
 """Entry point for the project."""
 
 
+from src.pythontemplate.debugging import list_faulty_wires
 from src.pythontemplate.get_key_gpio_mapping import (
     get_key_connection_dictionary,
 )
@@ -10,7 +11,7 @@ from src.pythontemplate.user_interface import (
 )
 
 # Output configuration.
-relative_output_dir = ""
+abs_output_dir = "/home/name/"
 left_keyboard_gpio_dict_file = "left_keyboard_gpio_dict.py"
 right_keyboard_gpio_dict_file = "right_keyboard_gpio_dict.py"
 
@@ -23,20 +24,11 @@ left_keys = get_left_keys()
 # keyboard.
 if ask_user_to_get_left_or_right_half("left"):
     left_dic = get_key_connection_dictionary(left_keys)
-    with open(
-        f"{relative_output_dir}/{left_keyboard_gpio_dict_file}", "w"
-    ) as f:
-        f.write(str(left_dic))
+    list_faulty_wires(left_dic, True)
 if ask_user_to_get_left_or_right_half("right"):
     right_dic = get_key_connection_dictionary(right_keys)
-    with open(
-        f"{relative_output_dir}/{right_keyboard_gpio_dict_file}", "w"
-    ) as f:
-        f.write(str(right_dic))
+    list_faulty_wires(right_dic, False)
 
-# TODO: Create a dictionary output method for the keyboard matrices. (Prompt
-# user for y/n to ask if user wants to export) and verify you can read
-# it in again.
 # TODO: create separate function/file that takes in the wiring and key-pin
 # relations to tell the user which wire is not connected properly if a
 # keyboard button does not work.

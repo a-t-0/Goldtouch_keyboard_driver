@@ -18,9 +18,10 @@ def print_matrix(connected_pins_per_key, rows):
         new_line = ""
         for key in row:
             new_line = f"{new_line}  {key}: {connected_pins_per_key[key]}"
-            # print(f'{key}: {connected_pins_per_key[key]}')
         print(new_line)
-        # print("")
+    print("\n Here is a version to copy-paste into the code:")
+    print(connected_pins_per_key)
+    print("")
     return connected_pins_per_key
 
 
