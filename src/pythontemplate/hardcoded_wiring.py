@@ -139,7 +139,7 @@ hardcoded_rhs = {
 # - Note there are double connections at GPIO pins 0 to 7, the LHS uses the top
 #   row of these wires.
 #  <GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard LHS>
-lhs_wires = Wires(
+hardcoded_lhs_wires = Wires(
     [
         Wire(0, "blue", 5),
         Wire(1, "green", 4),
@@ -170,7 +170,7 @@ lhs_wires = Wires(
 #   from left to right on the chip.
 
 # <GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard RHS>
-rhs_wires = Wires(
+hardcoded_rhs_wires = Wires(
     [
         Wire(0, "brown", 2),
         Wire(0, "brown", 2),
