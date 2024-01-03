@@ -1,7 +1,6 @@
 print("Starting")
 
 import board
-
 from kmk.extensions.media_keys import MediaKeys
 from kmk.handlers.sequences import send_string
 from kmk.keys import KC

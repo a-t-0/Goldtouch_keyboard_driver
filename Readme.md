@@ -254,8 +254,6 @@ This describes how the left-hand side is wired.
 
 ## TODO:
 
-- Update circuit python version to create more free space.
-- Run the KMK MWE to test one button is registered, then generalise it.
 - Make the driver start at boot.
 - Add pictures to story.
 
@@ -268,3 +266,9 @@ Cols:\[6, 7, 16, 17, 18, 19, 20, 21, 22, 26\]
 Right half:
 Rows:\[0, 1, 2, 3, 4, 5, 6, 7\]
 Cols:\[8, 9, 10, 11, 12, 13, 14, 15\]
+
+## Repo content description
+
+- `src`: The Python source code that allows you to verify and debug your Pico keyboard wiring. Flash Circuit Python `uf2` to your Pico, then copy the `src` folder into the Pico (USB) drive. Then open `thonny` then, inside `thonny`, open `src/pythontemplate/__main__.py` and run it by pressing the green run button.
+- `circuitpython`: Contains a `flash_nuke.uf2` to factory reset your Pico. Contains Circuit Python v8.2.9. To flash a `uf2` file to your pico, press the bootsel button, then plugin the USB pico into your pc, and release the bootsel button when the Pico USB drive pops up on your pc. Then drag the `uf2` file into the Pico USB drive. Then wait until the circuitPython Pico USB drive pops up on your pc.
+- `keyboard_driver`: After you are done with the wiring, etc. You can use the keyboard as a keyboard. Copy the content of the `keyboard_driver` into the root of the circuitPython Pico USB drive. Run `main.py`.
