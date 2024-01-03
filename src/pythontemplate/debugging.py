@@ -8,6 +8,27 @@ from src.pythontemplate.hardcoded_wiring import (
 )
 
 
+def get_rows_and_cols(keyboard_half_dict, is_left):
+    """Returns the rows and columns of the keyboard."""
+    rows = []
+    cols = []
+    for gpio_pin_pair in keyboard_half_dict.values():
+        if gpio_pin_pair[0] not in rows:
+            rows.append(gpio_pin_pair[0])
+        if gpio_pin_pair[1] not in cols:
+            cols.append(gpio_pin_pair[1])
+
+    cols.sort()
+    rows.sort()
+    if is_left:
+        print("Left half:")
+    else:
+        print("Right half:")
+    print(f"Rows:{rows}")
+    print(f"Cols:{cols}")
+    return rows, cols
+
+
 def get_keyboard_half_pin_key_matrix(keyboard_half_dict, is_left):
     """Returns the dictionary with the GPIO pin numbers for the back connector
     of the half of the keyboard.

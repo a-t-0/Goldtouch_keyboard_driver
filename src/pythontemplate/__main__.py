@@ -1,10 +1,11 @@
 """Entry point for the project."""
 
 
-from src.pythontemplate.debugging import list_faulty_wires
+from src.pythontemplate.debugging import get_rows_and_cols, list_faulty_wires
 from src.pythontemplate.get_key_gpio_mapping import (
     get_key_connection_dictionary,
 )
+from src.pythontemplate.hardcoded_wiring import hardcoded_lhs, hardcoded_rhs
 from src.pythontemplate.keys import get_left_keys, get_right_keys
 from src.pythontemplate.user_interface import (
     ask_user_to_get_left_or_right_half,
@@ -19,6 +20,8 @@ right_keyboard_gpio_dict_file = "right_keyboard_gpio_dict.py"
 right_keys = get_right_keys()
 left_keys = get_left_keys()
 
+get_rows_and_cols(hardcoded_lhs, is_left=True)
+get_rows_and_cols(hardcoded_rhs, is_left=False)
 
 # This asks you to press the keys, then it scans all GPIO ports on the
 # Raspberry Pico, and determines which two GPIO pins connect which key on the

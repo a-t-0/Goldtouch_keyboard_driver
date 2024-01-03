@@ -254,8 +254,17 @@ This describes how the left-hand side is wired.
 
 ## TODO:
 
-- [x] Give user option to specify left/right keyboard half.
-- Write a driver for the keyboard.
+- Update circuit python version to create more free space.
+- Run the KMK MWE to test one button is registered, then generalise it.
 - Make the driver start at boot.
-- Clean up the repo.
-- Write a brief story, include pictures, post.
+- Add pictures to story.
+
+## Rows and columns
+
+Derived from hardcoded:
+Left half:
+Rows:\[0, 1, 2, 3, 4, 5, 6, 7, 16, 17\]
+Cols:\[6, 7, 16, 17, 18, 19, 20, 21, 22, 26\]
+Right half:
+Rows:\[0, 1, 2, 3, 4, 5, 6, 7\]
+Cols:\[8, 9, 10, 11, 12, 13, 14, 15\]
