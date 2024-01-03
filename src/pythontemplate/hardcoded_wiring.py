@@ -31,7 +31,7 @@ class Wires:
 # This is the hardcoded dictionary with the GPIO pin numbers for the left half.
 # So if you press the key 'a' on the left half, it will connect GPIO pin 5 and
 # 10 on the Raspberry Pico.
-hardcoded_lhs = {
+hardcoded_rhs = {
     "I": (5, 8),
     "H": (7, 12),
     "K": (5, 11),
@@ -82,7 +82,7 @@ hardcoded_lhs = {
     "N": (7, 9),
 }
 
-hardcoded_rhs = {
+hardcoded_lhs = {
     "SPC": (2, 6),
     "LCTRL": (17, 21),
     "LEFT_SHIFT": (2, 19),

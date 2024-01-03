@@ -8,6 +8,7 @@ from src.pythontemplate.get_key_gpio_mapping import (
 from src.pythontemplate.keys import get_left_keys, get_right_keys
 from src.pythontemplate.user_interface import (
     ask_user_to_get_left_or_right_half,
+    print_messages,
 )
 
 # Output configuration.
@@ -24,10 +25,10 @@ left_keys = get_left_keys()
 # keyboard.
 if ask_user_to_get_left_or_right_half("left"):
     left_dic = get_key_connection_dictionary(left_keys)
-    list_faulty_wires(left_dic, True)
+    print_messages(messages=list_faulty_wires(left_dic, True))
 if ask_user_to_get_left_or_right_half("right"):
     right_dic = get_key_connection_dictionary(right_keys)
-    list_faulty_wires(right_dic, False)
+    print_messages(messages=list_faulty_wires(right_dic, False))
 
 # TODO: create separate function/file that takes in the wiring and key-pin
 # relations to tell the user which wire is not connected properly if a

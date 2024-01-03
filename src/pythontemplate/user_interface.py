@@ -36,3 +36,9 @@ def ask_user_to_get_left_or_right_half(half):
         return False
     print("Please enter y or n")
     return ask_user_to_get_left_or_right_half(half)
+
+
+def print_messages(messages):
+    """Prints the messages to the terminal."""
+    for message in messages:
+        print(message)
