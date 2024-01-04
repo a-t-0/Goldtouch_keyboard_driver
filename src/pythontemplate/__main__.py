@@ -1,4 +1,8 @@
 """Entry point for the project."""
+from src.pythontemplate.generate_kmk_main import generate_kmk_main
+
+generate_kmk_main()
+exit()
 
 
 from src.pythontemplate.debugging import get_rows_and_cols, list_faulty_wires
@@ -16,6 +20,7 @@ from src.pythontemplate.user_interface import (
 abs_output_dir = "/home/name/"
 left_keyboard_gpio_dict_file = "left_keyboard_gpio_dict.py"
 right_keyboard_gpio_dict_file = "right_keyboard_gpio_dict.py"
+
 
 right_keys = get_right_keys()
 left_keys = get_left_keys()

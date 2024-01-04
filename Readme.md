@@ -1,7 +1,7 @@
 # Converting Goldtouch bluetooth keyboard to USB
 
 Hi, I incorrectly assumed the micro-usb port on the keyboard could be used to
-connect the keyboard to the pc and to allow it to be used wireless, when I
+connect the keyboard to the pc to type using the USB connection, when I
 purchased it. Even though on the website the micro-USB connection is only for
 charging.
 
@@ -254,7 +254,10 @@ This describes how the left-hand side is wired.
 
 ## TODO:
 
+- Identify and switch the jumper wires leaving GPIO pin 6,7 with those leaving GPIO pin 16,17 (on the LHS side of the keyboard.). Then recreate the hardcoded wiring. Then recreate the kmk keyboard driver code, then run it to verify it works. (The issue is that the columns and rows have overlapping GPIO pins, which is not supported by KMK.)
+
 - Make the driver start at boot.
+
 - Add pictures to story.
 
 ## Rows and columns

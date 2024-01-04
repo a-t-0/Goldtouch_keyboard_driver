@@ -20,8 +20,7 @@ bitloop: ; This loop will run 8 times (8n1 UART)
 ; compiles to:
 """
 tx_code = array("H", [40864, 63271, 24577, 1602])
-"""
-.program uart_rx_mini
+""".program uart_rx_mini.
 
 ; Minimum viable 8n1 UART receiver. Wait for the start bit, then sample 8 bits
 ; with the correct timing.
