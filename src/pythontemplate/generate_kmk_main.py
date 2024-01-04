@@ -1,7 +1,6 @@
 """This code automatically generates the Python code that creates the KMK
 main.py file/driver for the keyboard."""
 
-from typing import List
 
 from src.pythontemplate.debugging import get_rows_and_cols
 from src.pythontemplate.hardcoded_wiring import hardcoded_lhs, hardcoded_rhs
@@ -20,12 +19,15 @@ from kmk.keys import KC
 from kmk.scanners import DiodeOrientation
 
 keyboard = KMKKeyboard()
+# Cleaner key names
+_______ = KC.TRNS
+XXXXXXX = KC.NO
 """
     rows, cols = get_merged_rows_and_cols()
     # rows=[0,1,2,3,4,5,7,16]
     # cols=[8,11,12]
-    col_pins: List[str] = []
-    row_pins: List[str] = []
+    col_pins = []
+    row_pins = []
     for row in rows:
         row_pins.append(f"board.GP{row}")
     for col in cols:
@@ -68,7 +70,6 @@ if __name__ == '__main__':
         + part_4
     )
     print(merged_code)
-    assert_dimensions_match_pin_rows_and_cols(kmk_key_matrix, rows, cols)
 
 
 def generate_main_key_map(rows, cols):
@@ -90,7 +91,7 @@ def generate_main_key_map(rows, cols):
                             kmk_key_matrix[i][j] = f"KC.{key}"
                 if not found_key:
                     # TODO: replace with permissible empty value.
-                    kmk_key_matrix[i][j] = "KC.AUDIO_VOL_UP"
+                    kmk_key_matrix[i][j] = "KC._______"
     return kmk_key_matrix
 
 
@@ -99,7 +100,7 @@ def initialise_matrix(rows, cols):
     for i in range(rows):
         row = []
         for j in range(cols):
-            row.append("KC.AUDIO_VOL_DOWN")
+            row.append("KC._______")
         matrix.append(row)
     return matrix
 
@@ -110,31 +111,14 @@ def get_merged_rows_and_cols():
     right_rows, right_cols = get_rows_and_cols(hardcoded_rhs, is_left=False)
     rows = list(set(left_rows + right_rows))
     cols = list(set(left_cols + right_cols))
-    print(f"merged rows={rows}")
-    print(f"merged cols={cols}")
     return rows, cols
 
 
 def kmk_key_matrix_to_str(kmk_key_matrix):
     """Converts the KMK key matrix to a string."""
-    matrix_str = ""
+    matrix_str = "["
     for row in kmk_key_matrix:
-        matrix_str += "["
         for key_name in row:
             matrix_str += key_name + ", "
-            print(key_name, end=", ")
-        matrix_str += "],\n"
-
+    matrix_str += "]"
     return matrix_str
-
-
-def assert_dimensions_match_pin_rows_and_cols(kmk_key_matrix, rows, cols):
-    """Verifies that the nr of the rows in the GPIO pins match the nr of rows
-    in the keyboard matrix.
-
-    Then verifies the number of columns in the GPIO pins match the
-    number of columns in the keyboard matrix.
-    """
-    print(f"matrix_rows={len(kmk_key_matrix)}")
-    for i, row in enumerate(kmk_key_matrix):
-        print(f"{i}: ncols={len(row)}")

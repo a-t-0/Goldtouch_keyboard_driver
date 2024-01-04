@@ -1,11 +1,7 @@
 """Entry point for the project."""
-from src.pythontemplate.generate_kmk_main import generate_kmk_main
-
-generate_kmk_main()
-exit()
-
 
 from src.pythontemplate.debugging import get_rows_and_cols, list_faulty_wires
+from src.pythontemplate.generate_kmk_main import generate_kmk_main
 from src.pythontemplate.get_key_gpio_mapping import (
     get_key_connection_dictionary,
 )
@@ -38,9 +34,6 @@ if ask_user_to_get_left_or_right_half("right"):
     right_dic = get_key_connection_dictionary(right_keys)
     print_messages(messages=list_faulty_wires(right_dic, False))
 
-# TODO: create separate function/file that takes in the wiring and key-pin
-# relations to tell the user which wire is not connected properly if a
-# keyboard button does not work.
-# TODO: rewrite get_mapping_V2 such that it also automatically outputs which
-# wire is not connected properly, if there is any wire not connected
-# properly.
+# If this code is not ran on the Pico, generate the Python code that creates
+# the KMK main.py file/driver for the keyboard.
+generate_kmk_main()
