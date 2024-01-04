@@ -15,6 +15,12 @@ substantiation is given for that number, and I was not able to apply the steps
 to resolve the issue. I am a big fan of the ergonomics of the keyboard and the
 feel. Hence, I converted it from bluetooth to USB using a Raspberry Pico.
 
+## Repo content description
+
+- `src`: The Python source code that allows you to verify and debug your Pico keyboard wiring. Flash Circuit Python `uf2` to your Pico, then copy the `src` folder into the Pico (USB) drive. Then open `thonny` then, inside `thonny`, open `src/pythontemplate/__main__.py` and run it by pressing the green run button. Then copy the code that is printed into the terminal into the `keyboard_driver/main.py` file.
+- `circuitpython`: Contains a `flash_nuke.uf2` to factory reset your Pico. Contains Circuit Python v8.2.9. To flash a `uf2` file to your pico, press the bootsel button, then plugin the USB pico into your pc, and release the bootsel button when the Pico USB drive pops up on your pc. Then drag the `uf2` file into the Pico USB drive. Then wait until the circuitPython Pico USB drive pops up on your pc.
+- `keyboard_driver`: After you are done with the wiring, etc. You can use the keyboard as a keyboard. Copy the content of the `keyboard_driver` into the root of the circuitPython Pico USB drive. Run `main.py`.
+
 ## Entertainment - road to Pico
 
 This section explains how I ended up doing this. I initially did not believe
@@ -116,6 +122,33 @@ tells you which wire is causing the issues if a key stops working. Then I wrote
 a driver to start the keyboard driver at boot. I did not type this from the
 modded Goldtouch keyboard.
 
+Then I wrote the code that writes the code that contains the KMK keyboard
+driver. Basically, KMK does all the heavy work and converts your Pico signals
+into actual keypresses, and this code just creates the matrix that maps the
+GPIO pin connections to the right keys based on your wiring. Then I found out
+that I made a mistake in the wiring. All keys worked, but some rows (corresponding
+to Pico GPIO pins 16 and 17) were also columns, and KMK does not accept that.
+I also noticed that rows 6 and 7 functioned as columns. So I switched the two
+wires into the left-hand side coming from Pico GPIO pins 16,17 with those
+coming from the Pico GPIO pins 6,7 (at the LHS back side of the keyboard), and
+updated the hardcoded wiring data accordingly.
+
+Then I learned that I had to put all the keys of the matrix into a list, and
+not into a list of lists with one list per row. You can have multiple key
+matrices, for example to switch the keyboard behaviour if you press the FN key
+but I did not yet do that. Also, it is important to specify the DIODE
+orientation. For the Goldtouch keyboard it had to be:
+`keyboard.diode_orientation = DiodeOrientation.COL2ROW`. I wrote these last
+two paragraphs on the Goldtouch wireless foldable keyboard over USB with the
+Pico!
+
+## Before your get to wiring:
+
+- Ensure that your wiring Pico GPIO pins results into `8/n` rows that do not
+  occur in the column GPIO pins. I do not exactly know how to design this, just
+  try something, run the code and see if the rows and columns have no overlap.
+  If they do, rewire untill they don't.
+
 ## Prerequisites/Installation
 
 1. Run:
@@ -166,112 +199,7 @@ Open a terminal, type `thonny`, in `thonny` open `__main__.py`, run it and say
 This asks you to press the keys, then it scans all GPIO ports on the Raspberry
 Pico, and determines which two GPIO pins connect which key on the keyboard.
 
-### Key-Pico GPIO pin matrix RHS:
-
-F8: (4, 15)  F9: (3, 15)  F10: (3, 14)  F11: (2, 14)  F12: (0, 14)  SCROLL_LOCK: (1, 15)  INSERT: (0, 15)  DELETE: (2, 15)
-
-7: (7, 14)  8: (5, 14)  9: (4, 14)  0: (6, 14)  MINUS: (6, 15)  EQUAL: (5, 15)  BACKSPACE: (3, 9)  BSPC: (3, 9)
-
-Y: (7, 13)  U: (7, 8)  I: (5, 8)  O: (4, 8)  P: (6, 8)  LBRACKET: (6, 13)  RBRACKET: (5, 13)  BACKSLASH: (5, 12)
-
-H: (7, 12)  J: (7, 11)  K: (5, 11)  L: (4, 11)  SEMICOLON: (6, 12)  QUOTE: (6, 11)  ENTER: (2, 8)  ENT: (2, 8)
-
-N: (7, 9)  m: (7, 10)  COMMA: (5, 10)  DOT: (4, 10)  SLASH: (6, 9)  RIGHT_SHIFT: (2, 12)  UP: (4, 9)  PRINT_SCREEN: (0, 8)
-
-SPACE: (1, 8)  SPC: (1, 8)  RIGHT_ALT: (0, 11)  RIGHT_SUPER: (3, 13)  RIGHT_CONTROL: (1, 10)  LEFT: (1, 9)  DOWN: (2, 9)  RIGHT: (0, 9)
-
-### Wiring details RHS
-
-This describes how the right-hand side is wired.
-
-- Skipping 0,1 18,19 on the flat connector because the outer 2 pins on each end of the flat connector on the back of the keyboard half are unused.
-- As seen from back, with the flat connector at the bottom, GPIO pins on top, from left to right on the chip.
-
-<GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard RHS>
-0-brown-2
-1-blue-3
-2-purple-4
-3-red-5
-4-yellow-6
-5-white-7# TODO: Create a dictionary output method for the keyboard matrices. (Prompt
-
-# user for y/n to ask if user wants to export) and verify you can read
-
-# it in again.
-
-6-green-8
-7-orange-9
-8-white-10
-9-black-11
-10-brown-12
-11-red-13
-12-orange-14
-13-yellow-15
-14-green-16
-15-gray-17
-
-## Running get_key_gpio_mapping.py for LHS
-
-For the left hand side one can see:
-matrix
-ESCAPE: (0, 19)  F1: (7, 26)  F2: (3, 7)  F3: (3, 20)  F4: (4, 7)  F5: (1, 6)  F6: (7, 22)  F7: (4, 6)
-
-HOME: (21, 22)  GRAVE: (0, 7)  1: (0, 21)  2: (21, 26)  3: (3, 21)  4: (5, 21)  5: (5, 7)  6: (5, 20)
-
-PGUP: (1, 21)  TAB: (0, 20)  TAB: (0, 20)  Q: (0, 6)  W: (20, 26)  E: (3, 6)  R: (5, 6)  T: (17, 26)
-
-PGDOWN: (4, 21)  CAPS_LOCK: (6, 26)  CAPSLOCK: (6, 26)  A: (0, 18)  S: (19, 26)  D: (3, 18)  F: (5, 18)  G: (1, 7)
-
-END: (6, 22)  LEFT_SHIFT: (2, 20)  LSHIFT: (2, 20)  Z: (0, 16)  X: (16, 26)  C: (3, 16)  V: (5, 16)  B: (3, 19)
-
-FN: (2, 21)  LEFT_CONTROL: (18, 22)  LCTRL: (18, 22)  LEFT_SUPER: (1, 19)  LEFT_ALT: (4, 16)  SPACE: (2, 6)  SPC: (2, 6)  SPACE: (2, 6)
-
-### Wiring details LHS
-
-This describes how the left-hand side is wired.
-
-- Skipping 0,1 18,19 on the flat connector because the outer 2 pins on each end of the flat connector on the back of the keyboard half are unused.
-- As seen from front of the keyboard, with the flat connector at the bottom, GPIO pins on top, from left to right on the chip.
-- Note there are double connections at GPIO pins 0 to 7, the LHS uses the top row of these wires.
-  <GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard LHS>
-  0-blue-5
-  1-green-4
-  2-black-6
-  3-brown-7
-  4-purple-3
-  5-red-2
-  6-white-16
-  7-yellow-17
-  than from top left to bottom left on Pico:
-  16-yellow-8
-  17-orange-9
-  18-red-10
-  19-brown-11
-  20-white-15
-  21-purple-14
-  22-blue-13
-  26-green-12
-
-## TODO:
-
-- Identify and switch the jumper wires leaving GPIO pin 6,7 with those leaving GPIO pin 16,17 (on the LHS side of the keyboard.). Then recreate the hardcoded wiring. Then recreate the kmk keyboard driver code, then run it to verify it works. (The issue is that the columns and rows have overlapping GPIO pins, which is not supported by KMK.)
+## TODO
 
 - Make the driver start at boot.
-
 - Add pictures to story.
-
-## Rows and columns
-
-Derived from hardcoded:
-Left half:
-Rows:\[0, 1, 2, 3, 4, 5, 6, 7, 16, 17\]
-Cols:\[6, 7, 16, 17, 18, 19, 20, 21, 22, 26\]
-Right half:
-Rows:\[0, 1, 2, 3, 4, 5, 6, 7\]
-Cols:\[8, 9, 10, 11, 12, 13, 14, 15\]
-
-## Repo content description
-
-- `src`: The Python source code that allows you to verify and debug your Pico keyboard wiring. Flash Circuit Python `uf2` to your Pico, then copy the `src` folder into the Pico (USB) drive. Then open `thonny` then, inside `thonny`, open `src/pythontemplate/__main__.py` and run it by pressing the green run button.
-- `circuitpython`: Contains a `flash_nuke.uf2` to factory reset your Pico. Contains Circuit Python v8.2.9. To flash a `uf2` file to your pico, press the bootsel button, then plugin the USB pico into your pc, and release the bootsel button when the Pico USB drive pops up on your pc. Then drag the `uf2` file into the Pico USB drive. Then wait until the circuitPython Pico USB drive pops up on your pc.
-- `keyboard_driver`: After you are done with the wiring, etc. You can use the keyboard as a keyboard. Copy the content of the `keyboard_driver` into the root of the circuitPython Pico USB drive. Run `main.py`.
