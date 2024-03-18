@@ -1,0 +1,24 @@
+{
+  "chat_uuid": null,
+  "messages": [
+    {
+      "codeType": "docstring",
+      "creator": "user",
+      "id_in_browser": 0,
+      "is_applied": false,
+      "message_str": "Please write the function docstring for the following function:\n\n\n\n    def __init__(self, **kwargs):\n        self._evt = bytearray(self.REPORT_BYTES)\n        self._evt[0] = HIDReportTypes.KEYBOARD\n        self._nkro = False\n\n        # bodgy NKRO autodetect\n        try:\n            self.hid_send(self._evt)\n            if debug.enabled:\n                debug(\"use 6KRO\")\n        except ValueError:\n            self.REPORT_BYTES = 17\n            self._evt = bytearray(self.REPORT_BYTES)\n            self._evt[0] = HIDReportTypes.KEYBOARD\n            self._nkro = True\n            if debug.enabled:\n                debug(\"use NKRO\")\n\n        self._prev_evt = bytearray(self.REPORT_BYTES)\n\n        # Landmine alert for HIDReportTypes.KEYBOARD: byte index 1 of this view\n        # is \"reserved\" and evidently (mostly?) unused. However, other modes (or\n        # at least consumer, so far) will use this byte, which is the main reason\n        # this view exists. For KEYBOARD, use report_mods and report_non_mods\n        self.report_keys = memoryview(self._evt)[1:]\n\n        self.report_mods = memoryview(self._evt)[1:2]\n        self.report_non_mods = memoryview(self._evt)[3:]\n\n        self._cc_report = bytearray(\n            HID_REPORT_SIZES[HIDReportTypes.CONSUMER] + 1\n        )\n        self._cc_report[0] = HIDReportTypes.CONSUMER\n        self._cc_pending = False\n\n        self._pd_report = bytearray(HID_REPORT_SIZES[HIDReportTypes.MOUSE] + 1)\n        self._pd_report[0] = HIDReportTypes.MOUSE\n        self._pd_pending = False\n\n        # bodgy pointing device panning autodetect\n        try:\n            self.hid_send(self._pd_report)\n            if debug.enabled:\n                debug(\"use no pan\")\n        except ValueError:\n            self._pd_report = bytearray(6)\n            self._pd_report[0] = HIDReportTypes.MOUSE\n            if debug.enabled:\n                debug(\"use pan\")\n        except KeyError:\n            if debug.enabled:\n                debug(\"mouse disabled\")\n\n\nInclude each argument that the function above has, if it has any.\nDo not include (code) formatting, just give your answer as plain text.\n\nGenerate the docstring using the following format (filled in with an example):\n\n|Start-response|\n|Docstring-core|\nConverts the name of a tree and its GPS coordinates into a tree\nobject.\n\n|Arg1-name|\ntree\n|Arg1-type|\nstr\n|Arg1-description|\nThe name of a tree.\n\n|Arg2-name|\nlocation\n|Arg2-type|\nTuple[int,int]\n|Arg2-description|\nThe GPS coordinates of a tree.\n\n|Return-type|\nTree\n|Return-description|\nA tree with name and location.\n|End-response|\n"
+    },
+    {
+      "codeType": "docstring",
+      "creator": "gemini",
+      "id_in_browser": 1,
+      "is_applied": false,
+      "is_compilability": false,
+      "is_completeness": true,
+      "is_pre_commit_passes": false,
+      "is_runnability": false,
+      "is_tests_pass": false,
+      "message_str": "|Start-response|\n|Docstring-core|\nThe HybridEngine class manages writing to various HID-connected devices.\nCurrently supports keyboards, consumer, and mouse devices.\n\n|Arg1-name|\nkwargs\n|Arg1-type|\ndict\n|Arg1-description|\nDict containing optional options:\n> async_=False - Block until operations have successfully completed. Defaults to False.\n> debug_=False - Enable debugging output. Defaults to False.\n\n|Return-type|\nHybridEngine\n|Return-description|\nHybridEngine object interface for endpoints.\n|End-response|"
+    }
+  ]
+}
