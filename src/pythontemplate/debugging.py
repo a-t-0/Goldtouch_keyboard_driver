@@ -9,7 +9,12 @@ from src.pythontemplate.hardcoded_wiring import (
 
 
 def get_rows_and_cols(keyboard_half_dict, is_left):
-    """Returns the rows and columns of the keyboard."""
+    """Returns the rows and columns of the keyboard.
+
+    :keyboard_half_dict: (dict),  A dictionary of GPIO pin pairs.
+    :is_left: (bool),  A flag indicating whether the keyboard half is
+    left or right.
+    """
     rows = []
     cols = []
     for gpio_pin_pair in keyboard_half_dict.values():

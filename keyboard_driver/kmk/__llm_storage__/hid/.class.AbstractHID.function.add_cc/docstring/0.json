@@ -1,0 +1,24 @@
+{
+  "chat_uuid": null,
+  "messages": [
+    {
+      "codeType": "docstring",
+      "creator": "user",
+      "id_in_browser": 0,
+      "is_applied": false,
+      "message_str": "Please write the function docstring for the following function:\n\n\n    def add_cc(self, cc):\n        # Add (or write over) consumer control report. There can only be one CC\n        # active at any time.\n        memoryview(self._cc_report)[1:3] = cc.code.to_bytes(2, \"little\")\n        self._cc_pending = True\n\nInclude each argument that the function above has, if it has any.\nDo not include (code) formatting, just give your answer as plain text.\n\nGenerate the docstring using the following format (filled in with an example):\n\n|Start-response|\n|Docstring-core|\nConverts the name of a tree and its GPS coordinates into a tree\nobject.\n\n|Arg1-name|\ntree\n|Arg1-type|\nstr\n|Arg1-description|\nThe name of a tree.\n\n|Arg2-name|\nlocation\n|Arg2-type|\nTuple[int,int]\n|Arg2-description|\nThe GPS coordinates of a tree.\n\n|Return-type|\nTree\n|Return-description|\nA tree with name and location.\n|End-response|\n"
+    },
+    {
+      "codeType": "docstring",
+      "creator": "gemini",
+      "id_in_browser": 1,
+      "is_applied": false,
+      "is_compilability": false,
+      "is_completeness": true,
+      "is_pre_commit_passes": false,
+      "is_runnability": false,
+      "is_tests_pass": false,
+      "message_str": "|Start-response|\n|Docstring-core|\nAdds (or overwrites) a consumer control report. There can only be one CC active at any time.\n\n|Arg1-name|\ncc\n|Arg1-type|\nConsumerControlReport\n|Arg1-description|\nA consumer control report to add.\n\n|Return-type|\nNone\n|Return-description|\nNone\n|End-response|"
+    }
+  ]
+}
