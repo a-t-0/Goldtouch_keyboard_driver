@@ -1,7 +1,7 @@
 """This code automatically generates the Python code that creates the KMK
 main.py file/driver for the keyboard."""
 
-from src.picokeyboard.wiring.hardcoded_wiring import (
+from src.picokeyboard.hardcoded.hardcoded_wiring import (
     hardcoded_lhs,
     hardcoded_rhs,
 )

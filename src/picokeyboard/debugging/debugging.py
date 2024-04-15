@@ -5,18 +5,18 @@ from src.picokeyboard.ask_user.user_interface import (
     ask_user_to_get_left_or_right_half,
     print_messages,
 )
+from src.picokeyboard.hardcoded.hardcoded_wiring import (
+    hardcoded_lhs,
+    hardcoded_lhs_wires,
+    hardcoded_rhs,
+    hardcoded_rhs_wires,
+)
 from src.picokeyboard.hardcoded.keys import (
     load_hardcoded_left_keys,
     load_hardcoded_right_keys,
 )
 from src.picokeyboard.wiring.get_key_gpio_mapping import (
     get_key_connection_dictionary,
-)
-from src.picokeyboard.wiring.hardcoded_wiring import (
-    hardcoded_lhs,
-    hardcoded_lhs_wires,
-    hardcoded_rhs,
-    hardcoded_rhs_wires,
 )
 
 

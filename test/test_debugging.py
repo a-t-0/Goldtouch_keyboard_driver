@@ -9,7 +9,7 @@ from typeguard import typechecked
 from src.picokeyboard.debugging.debugging import list_faulty_wires
 
 # Load fully connected keyboard half matrix dictionary.
-from src.picokeyboard.wiring.hardcoded_wiring import hardcoded_rhs
+from src.picokeyboard.hardcoded.hardcoded_wiring import hardcoded_rhs
 
 
 class Test_adder(unittest.TestCase):
