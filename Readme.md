@@ -154,42 +154,26 @@ Pico!
 1. Run:
 
 ```
-
 sudo apt update
+sudo apt install thonny
 sudo snap install micropython
-sudo snap install thonny
+
 user=$(whoami)
 echo "$user"
 sudo usermod -a -G dialout $user
 sudo reboot now
-
 ```
-
-2. In the bottom right of Thonny, it may say: `Python 3.xx`, and you should
+2. **In the bottom right of Thonny**, it may say: `Python 3.xx`, and you should
    click on it and then select:
 
 ```
 MicroPython (Raspberry Pi Pico)
 ```
 
-(or for the `get_key_gpio_mapping.py`):
-
-```
-CircuitPython
-```
-
-3. Install `RPi.gpio` package/library in Thonny by using:
-
-```
-Tools>Manage Plug-ins>Search for:
-```
-
-```
-RPi.GPIO
-```
-
-Then you have to probably restart thonny to enable it to use the recently
-installed library.
+## Using the keyboard
+open `thonny` by typing it in the CLI, then press `ctrl+o` and select the circuitPython device in the dialog
+box. If it does not show that box, you have not selected the `MicroPython` in the bottom right of Thonnny,
+and you should still do that. Then open `mwe0.py` and run it.
 
 ## Check all keys work
 
