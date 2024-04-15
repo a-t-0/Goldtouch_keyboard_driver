@@ -4,7 +4,7 @@ Assumes a split keyboard.
 """
 
 
-def get_right_keys():
+def load_hardcoded_right_keys():
     """Start at top left.
 
     Go Western reading, first left to right, then top to bottom.
@@ -81,7 +81,7 @@ def get_right_keys():
     return rows
 
 
-def get_left_keys():
+def load_hardcoded_left_keys():
     """Start at top left.
 
     Go Western reading, first left to right, then top to # bottom.

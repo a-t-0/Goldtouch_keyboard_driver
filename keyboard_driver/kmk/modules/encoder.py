@@ -32,9 +32,9 @@ class BaseEncoder:
 
     def get_state(self):
         return {
-            "direction": self.is_inverted
-            and -self._direction
-            or self._direction,
+            "direction": (
+                self.is_inverted and -self._direction or self._direction
+            ),
             "position": self.is_inverted and -self._pos or self._pos,
             "is_pressed": not self._button_state,
             "velocity": self._velocity,
@@ -236,9 +236,9 @@ class I2CEncoder(BaseEncoder):
 
     def get_state(self):
         return {
-            "direction": self.is_inverted
-            and -self._direction
-            or self._direction,
+            "direction": (
+                self.is_inverted and -self._direction or self._direction
+            ),
             "position": self._state,
             "is_pressed": not self.switch.value,
             "is_held": self._button_held,

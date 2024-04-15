@@ -1,14 +1,15 @@
 """Tests whether the adder function indeed adds 2 to a given input."""
+
 import copy
 import unittest
 from typing import List
 
 from typeguard import typechecked
 
-from src.pythontemplate.debugging import list_faulty_wires
+from src.picokeyboard.debugging.debugging import list_faulty_wires
 
 # Load fully connected keyboard half matrix dictionary.
-from src.pythontemplate.hardcoded_wiring import hardcoded_rhs
+from src.picokeyboard.wiring.hardcoded_wiring import hardcoded_rhs
 
 
 class Test_adder(unittest.TestCase):

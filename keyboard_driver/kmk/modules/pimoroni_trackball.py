@@ -1,4 +1,5 @@
 """Extension handles usage of Trackball Breakout by Pimoroni."""
+
 import math
 import struct
 

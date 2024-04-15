@@ -6,8 +6,7 @@
 # So to resolve that, a mirror is created that includes such a file.
 
 default_language_version:
-    python: python3.10.  # or python3
-
+    python: python3.12.
 
 repos:
 # Test if the python code is formatted according to the Black standard.
@@ -17,13 +16,17 @@ repos:
      - id: black-conda
        args:
          - --safe
-         - --target-version=py36
+         - --target-version=py312
+         - --preview
+         - --line-length=80
 
 # Test if the python code is formatted according to the flake8 standard.
  - repo: https://github.com/Quantco/pre-commit-mirrors-flake8
    rev: 6.1.0
    hooks:
     - id: flake8-conda
+      exclude: ^keyboard_driver/
+
 
 # Test if the import statements are sorted correctly.
  - repo: https://github.com/PyCQA/isort
@@ -45,6 +48,7 @@ repos:
       args: ["--strict"]
       additional_dependencies:
             - typeguard
+      exclude: ^keyboard_driver/
 
   # TODO:
   #--strict
@@ -61,6 +65,7 @@ repos:
    rev: v2.2.6
    hooks:
     - id: codespell
+      exclude: ^keyboard_driver/
 
 # Performs static code analysis to check for programming errors.
  - repo: local
@@ -68,6 +73,7 @@ repos:
      - id: pylint
        name: pylint
        entry: pylint
+       exclude: ^keyboard_driver/
        language: system
        types: [python]
        args:

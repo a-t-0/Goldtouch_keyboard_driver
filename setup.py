@@ -1,4 +1,5 @@
-"""Packaging logic for pythontemplate."""
+"""Packaging logic for picokeyboard."""
+
 from __future__ import annotations
 
 import os

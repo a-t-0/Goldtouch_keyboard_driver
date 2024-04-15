@@ -1,6 +1,18 @@
 """Helps the user identify which wire connection is not working properly, if
 any."""
-from src.pythontemplate.hardcoded_wiring import (
+
+from src.picokeyboard.ask_user.user_interface import (
+    ask_user_to_get_left_or_right_half,
+    print_messages,
+)
+from src.picokeyboard.hardcoded.keys import (
+    load_hardcoded_left_keys,
+    load_hardcoded_right_keys,
+)
+from src.picokeyboard.wiring.get_key_gpio_mapping import (
+    get_key_connection_dictionary,
+)
+from src.picokeyboard.wiring.hardcoded_wiring import (
     hardcoded_lhs,
     hardcoded_lhs_wires,
     hardcoded_rhs,
@@ -8,56 +20,24 @@ from src.pythontemplate.hardcoded_wiring import (
 )
 
 
-def get_rows_and_cols(keyboard_half_dict, is_left):
-    """Returns the rows and columns of the keyboard.
+def debug_keyboard_keys() -> None:
+    """Loads the wiring scheme, then asks the user to press each key, and then
+    prints which wires are not wired correctly."""
 
-    :keyboard_half_dict: (dict),  A dictionary of GPIO pin pairs.
-    :is_left: (bool),  A flag indicating whether the keyboard half is
-    left or right.
-    """
-    rows = []
-    cols = []
-    for gpio_pin_pair in keyboard_half_dict.values():
-        if gpio_pin_pair[0] not in rows:
-            rows.append(gpio_pin_pair[0])
-        if gpio_pin_pair[1] not in cols:
-            cols.append(gpio_pin_pair[1])
+    right_keys = load_hardcoded_right_keys()
+    left_keys = load_hardcoded_left_keys()
+    if ask_user_to_get_left_or_right_half("left"):
+        left_dic = get_key_connection_dictionary(left_keys)
+        print_messages(messages=list_faulty_wires(left_dic, True))
 
-    cols.sort()
-    rows.sort()
-    if is_left:
-        print("Left half:")
-    else:
-        print("Right half:")
-    print(f"Rows:{rows}")
-    print(f"Cols:{cols}")
-    return rows, cols
+    if ask_user_to_get_left_or_right_half("right"):
+        right_dic = get_key_connection_dictionary(right_keys)
+        print_messages(messages=list_faulty_wires(right_dic, False))
 
-
-def get_keyboard_half_pin_key_matrix(keyboard_half_dict, is_left):
-    """Returns the dictionary with the GPIO pin numbers for the back connector
-    of the half of the keyboard.
-
-    TODO: write test for this function.
-    """
-    back_half_key_matrix = {}
-    if is_left:
-        expected_wires = hardcoded_lhs_wires
-    else:
-        expected_wires = hardcoded_rhs_wires
-
-    for key, value in keyboard_half_dict.items():
-        if value == (None, None):
-            raise ValueError("The key matrix is not complete.")
-        # Get the relevant wire based on keymatrix.
-        left_wire, right_wire = get_wire(
-            keyboard_half_dict[key], expected_wires
-        )
-        back_half_key_matrix[key] = (
-            left_wire.keyboard_pin_nr,
-            right_wire.keyboard_pin_nr,
-        )
-    return back_half_key_matrix
+    # TODO: move this comment.
+    # This asks you to press the keys, then it scans all GPIO ports on the
+    # Raspberry Pico, and determines which two GPIO pins connect which key on
+    # the keyboard.
 
 
 def list_faulty_wires(keyboard_half_dict, is_left):

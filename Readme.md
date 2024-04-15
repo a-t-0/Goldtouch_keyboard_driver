@@ -1,8 +1,8 @@
 # Creating/Modding your own Keyboard with a Raspberry Pico
 
 This repository lets you use your Raspberri Pico as a keyboard. It helps you
-get the wiring sceme after you wired your keyboard, and then writes the
-code needed to use your Pico as a keyboard, using that sceme. It has a
+get the wiring scheme after you wired your keyboard, and then writes the
+code needed to use your Pico as a keyboard, using that scheme. It has a
 separate debugging tool to show you which wire(s) have a bad connection if some
 keys don't work.
 
@@ -13,9 +13,9 @@ To use this to build your own keyboard:
 
 1. Install [the prerequisites](prerequisites/installation).
 1. [Wire it](before-you-get-to-wiring).
-1. [Run code to store wiring sceme file into repository](todo).
+1. [Run code to store wiring scheme file into repository](todo).
 1. [Generate the code](todo) that you can use to use the keyboard, based on the
-   generated wiring sceme file.
+   generated wiring scheme file.
 1. [Use the code to run the keyboard.](todo)
 
 ## 1. Prerequisites/Installation
@@ -44,14 +44,14 @@ MicroPython (Raspberry Pi Pico)
 
 For detailed wiring see [here](/Wiring.md).
 
-## 3. Generate Wiring Sceme
+## 3. Generate Wiring Scheme
 
 This section is also moved into the [Wiring.md](/Wiring.md)
 
 ## 4. Generating the code to use the keyboard
 
-TODO: ensure the user can generate the wiring sceme using the
-`--generate-wiring` or `-gw` sceme.
+TODO: ensure the user can generate the wiring scheme using the
+`--generate-wiring` or `-gw` scheme.
 
 ## 5. Using the keyboard
 

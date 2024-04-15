@@ -111,9 +111,7 @@ class Power(Module):
         updates."""
         if check_deadline(ticks_ms(), self._powersave_start, 60000):
             sleep(8 / 1000)
-        elif (
-            check_deadline(ticks_ms(), self._powersave_start, 240000) is False
-        ):
+        elif check_deadline(ticks_ms(), self._powersave_start, 240000) is False:
             sleep(180 / 1000)
         return
 

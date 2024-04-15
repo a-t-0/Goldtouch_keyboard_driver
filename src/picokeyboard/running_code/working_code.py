@@ -1,5 +1,3 @@
-print("Starting")
-
 import board
 from kmk.keys import KC
 from kmk.kmk_keyboard import KMKKeyboard
@@ -9,7 +7,7 @@ keyboard = KMKKeyboard()
 
 # Cleaner key names
 _______ = KC.TRNS
-XXXXXXX = KC.NO
+
 
 keyboard.row_pins = (
     board.GP0,
@@ -49,7 +47,7 @@ keyboard.keymap = [[
     KC.F,
     _______,
     KC.INSERT,
-    KC.PRINT_SCREEN,
+    KC.PGDOWN,
     KC.RIGHT,
     _______,
     _______,
@@ -86,7 +84,7 @@ keyboard.keymap = [[
     _______,
     _______,
     _______,
-    KC.RIGHT_SHIFT,
+    KC.PGUP,
     _______,
     KC.F11,
     KC.SPC,

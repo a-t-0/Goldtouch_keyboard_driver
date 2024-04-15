@@ -22,7 +22,8 @@ class statusLED(Extension):
             except Exception as e:
                 print(e)
                 raise InvalidExtensionEnvironment(
-                    "Unable to create pulseio.PWMOut() instance with provided led_pin"
+                    "Unable to create pulseio.PWMOut() instance with provided"
+                    " led_pin"
                 )
         self._led_count = len(self._leds)
 

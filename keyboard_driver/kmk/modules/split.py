@@ -1,4 +1,5 @@
 """Enables splitting keyboards wirelessly or wired."""
+
 import busio
 from keypad import Event as KeyEvent
 from kmk.hid import HIDModes
@@ -62,9 +63,7 @@ class Split(Module):
                 from adafruit_ble.services.nordic import UARTService
 
                 self.BLERadio = BLERadio
-                self.ProvideServicesAdvertisement = (
-                    ProvideServicesAdvertisement
-                )
+                self.ProvideServicesAdvertisement = ProvideServicesAdvertisement
                 self.UARTService = UARTService
             except ImportError:
                 print("BLE Import error")
@@ -228,8 +227,7 @@ class Split(Module):
             if self._advertising or not self._check_if_split_connected():
                 self._target_advertise()
             elif (
-                self._connection_count < 2
-                and keyboard.hid_type == HIDModes.BLE
+                self._connection_count < 2 and keyboard.hid_type == HIDModes.BLE
             ):
                 keyboard._hid_helper.start_advertising()
 

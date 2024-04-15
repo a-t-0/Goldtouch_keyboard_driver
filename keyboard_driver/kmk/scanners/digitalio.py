@@ -36,29 +36,37 @@ class MatrixScanner(Scanner):
 
         if self.diode_orientation == DiodeOrientation.COLUMNS:
             self.anodes = [
-                x
-                if x.__class__.__name__ == "DigitalInOut"
-                else digitalio.DigitalInOut(x)
+                (
+                    x
+                    if x.__class__.__name__ == "DigitalInOut"
+                    else digitalio.DigitalInOut(x)
+                )
                 for x in cols
             ]
             self.cathodes = [
-                x
-                if x.__class__.__name__ == "DigitalInOut"
-                else digitalio.DigitalInOut(x)
+                (
+                    x
+                    if x.__class__.__name__ == "DigitalInOut"
+                    else digitalio.DigitalInOut(x)
+                )
                 for x in rows
             ]
             self.translate_coords = True
         elif self.diode_orientation == DiodeOrientation.ROWS:
             self.anodes = [
-                x
-                if x.__class__.__name__ == "DigitalInOut"
-                else digitalio.DigitalInOut(x)
+                (
+                    x
+                    if x.__class__.__name__ == "DigitalInOut"
+                    else digitalio.DigitalInOut(x)
+                )
                 for x in rows
             ]
             self.cathodes = [
-                x
-                if x.__class__.__name__ == "DigitalInOut"
-                else digitalio.DigitalInOut(x)
+                (
+                    x
+                    if x.__class__.__name__ == "DigitalInOut"
+                    else digitalio.DigitalInOut(x)
+                )
                 for x in cols
             ]
             self.translate_coords = False

@@ -1,5 +1,6 @@
 """This file can be used to store temporary wiring schemes, for example if you
 are experimenting, without losing the hardcoded original wiring."""
+
 lhs = {
     "I": (5, 8),
     "H": (7, 12),

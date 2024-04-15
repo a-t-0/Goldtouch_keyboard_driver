@@ -7,7 +7,7 @@ Here are the instructions on how to wire your Pico with your own keyboard.
 - Ensure that your wiring Pico GPIO pins results into `8/n` rows that do not
   occur in the column GPIO pins. I do not exactly know how to design this, just
   try something, run the code and see if the rows and columns have no overlap.
-  If they do, rewire untill they don't.
+  If they do, rewire until they don't.
 
 ## Check all keys work
 

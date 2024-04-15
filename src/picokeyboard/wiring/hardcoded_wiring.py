@@ -139,27 +139,25 @@ hardcoded_lhs = {
 # - Note there are double connections at GPIO pins 0 to 7, the LHS uses the top
 #   row of these wires.
 #  <GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard LHS>
-hardcoded_lhs_wires = Wires(
-    [
-        Wire(0, "blue", 5),
-        Wire(1, "green", 4),
-        Wire(2, "black", 6),
-        Wire(3, "brown", 7),
-        Wire(4, "purple", 3),
-        Wire(5, "red", 2),
-        Wire(6, "white", 9),
-        Wire(7, "yellow", 8),
-        # Then from top left to bottom left on Pico:
-        Wire(16, "yellow", 16),
-        Wire(17, "orange", 17),
-        Wire(18, "red", 10),
-        Wire(19, "brown", 11),
-        Wire(20, "white", 15),
-        Wire(21, "purple", 14),
-        Wire(22, "blue", 13),
-        Wire(26, "green", 12),
-    ]
-)
+hardcoded_lhs_wires = Wires([
+    Wire(0, "blue", 5),
+    Wire(1, "green", 4),
+    Wire(2, "black", 6),
+    Wire(3, "brown", 7),
+    Wire(4, "purple", 3),
+    Wire(5, "red", 2),
+    Wire(6, "white", 9),
+    Wire(7, "yellow", 8),
+    # Then from top left to bottom left on Pico:
+    Wire(16, "yellow", 16),
+    Wire(17, "orange", 17),
+    Wire(18, "red", 10),
+    Wire(19, "brown", 11),
+    Wire(20, "white", 15),
+    Wire(21, "purple", 14),
+    Wire(22, "blue", 13),
+    Wire(26, "green", 12),
+])
 
 
 # This describes how the right-hand side is wired.
@@ -170,24 +168,22 @@ hardcoded_lhs_wires = Wires(
 #   from left to right on the chip.
 
 # <GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard RHS>
-hardcoded_rhs_wires = Wires(
-    [
-        Wire(0, "brown", 2),
-        Wire(0, "brown", 2),
-        Wire(1, "blue", 3),
-        Wire(2, "purple", 4),
-        Wire(3, "red", 5),
-        Wire(4, "yellow", 6),
-        Wire(5, "white", 7),
-        Wire(6, "green", 8),
-        Wire(7, "orange", 9),
-        Wire(8, "white", 10),
-        Wire(9, "black", 11),
-        Wire(10, "brown", 12),
-        Wire(11, "red", 13),
-        Wire(12, "orange", 14),
-        Wire(13, "yellow", 15),
-        Wire(14, "green", 16),
-        Wire(15, "gray", 17),
-    ]
-)
+hardcoded_rhs_wires = Wires([
+    Wire(0, "brown", 2),
+    Wire(0, "brown", 2),
+    Wire(1, "blue", 3),
+    Wire(2, "purple", 4),
+    Wire(3, "red", 5),
+    Wire(4, "yellow", 6),
+    Wire(5, "white", 7),
+    Wire(6, "green", 8),
+    Wire(7, "orange", 9),
+    Wire(8, "white", 10),
+    Wire(9, "black", 11),
+    Wire(10, "brown", 12),
+    Wire(11, "red", 13),
+    Wire(12, "orange", 14),
+    Wire(13, "yellow", 15),
+    Wire(14, "green", 16),
+    Wire(15, "gray", 17),
+])

@@ -2,6 +2,7 @@
 
 Adds keys to get to more of them
 """
+
 from kmk.keys import KC, make_argumented_key
 from kmk.modules.holdtap import HoldTap, HoldTapKeyMeta
 from kmk.utils import Debug
@@ -180,7 +181,5 @@ class Layers(HoldTap):
 
     def _deactivate_combo_layer(self, keyboard, layer):
         if self._active_combo and layer in self._active_combo:
-            keyboard.active_layers.remove(
-                self.combo_layers[self._active_combo]
-            )
+            keyboard.active_layers.remove(self.combo_layers[self._active_combo])
             self._active_combo = None

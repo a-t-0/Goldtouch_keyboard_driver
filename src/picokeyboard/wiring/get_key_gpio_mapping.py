@@ -1,20 +1,29 @@
 """Contains functions that read out how the GPIO pins on the Raspberry Pico are
 connected through key-presses."""
-from src.pythontemplate.gpio_pin_nrs import (
-    create_emtpy_pin_connection_matrix_dictionary,
-)
-from src.pythontemplate.pico_probing import get_connected_pins_per_key
-from src.pythontemplate.user_interface import (  # circuitpython only
+
+from src.picokeyboard.debugging.pico_probing import get_connected_pins_per_key
+from src.picokeyboard.user_interface import (  # circuitpython only
     ask_user_to_press_pin,
     print_matrix,
 )
+
+
+def create_emtpy_pin_connection_matrix_dictionary(*, rows):
+    """Creates an empty dictionary to store a tuple of two integers
+    representing the two GPIO pin numbers on the Raspberry Pico, for each key
+    in the keyboard matrix."""
+    connected_pins_per_key = {}
+    for row in rows:
+        for key in row:
+            connected_pins_per_key[key] = None
+    return connected_pins_per_key
 
 
 def store_pin_connection_pairs_per_key(rows):
     """Ask the user to press each key and store the connected pins in a
     dictionary."""
     connected_pins_per_key = create_emtpy_pin_connection_matrix_dictionary(
-        rows
+        rows=rows
     )
     for row in rows:
         for key in row:

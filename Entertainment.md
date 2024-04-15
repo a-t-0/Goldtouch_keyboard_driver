@@ -69,7 +69,7 @@ keyboard (likely) does is:
 - check if wire 1 and wire 9 are connected. If yes, Q is pressed.
   etc.
   But then for the entire matrix, a few (hundred?) times per second, to catch
-  all your keystrokes. [Excelent visual explanation](https://pcbheaven.com/wikipages/How_Key_Matrices_Works/)
+  all your keystrokes. [Excellent visual explanation](https://pcbheaven.com/wikipages/How_Key_Matrices_Works/)
   Since the Raspberry Pico only has 24 GPIO pins, instead of 32, I was able to
   use the pins 0 to 7 twice, once for the rows on the left half of the
   keyboard, and once for the right half of the keyboard (each consisting of 64

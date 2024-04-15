@@ -1,9 +1,10 @@
 """This code automatically generates the Python code that creates the KMK
 main.py file/driver for the keyboard."""
 
-
-from src.pythontemplate.debugging import get_rows_and_cols
-from src.pythontemplate.hardcoded_wiring import hardcoded_lhs, hardcoded_rhs
+from src.picokeyboard.wiring.hardcoded_wiring import (
+    hardcoded_lhs,
+    hardcoded_rhs,
+)
 
 
 def generate_kmk_main():
@@ -103,6 +104,32 @@ def initialise_matrix(rows, cols):
             row.append("KC._______")
         matrix.append(row)
     return matrix
+
+
+def get_rows_and_cols(keyboard_half_dict, is_left):
+    """Returns the rows and columns of the keyboard.
+
+    :keyboard_half_dict: (dict),  A dictionary of GPIO pin pairs.
+    :is_left: (bool),  A flag indicating whether the keyboard half is
+    left or right.
+    """
+    rows = []
+    cols = []
+    for gpio_pin_pair in keyboard_half_dict.values():
+        if gpio_pin_pair[0] not in rows:
+            rows.append(gpio_pin_pair[0])
+        if gpio_pin_pair[1] not in cols:
+            cols.append(gpio_pin_pair[1])
+
+    cols.sort()
+    rows.sort()
+    if is_left:
+        print("Left half:")
+    else:
+        print("Right half:")
+    print(f"Rows:{rows}")
+    print(f"Cols:{cols}")
+    return rows, cols
 
 
 def get_merged_rows_and_cols():

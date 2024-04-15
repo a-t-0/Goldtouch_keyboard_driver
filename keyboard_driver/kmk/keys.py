@@ -727,7 +727,9 @@ class ModifierKey(Key):
         )
 
     def __repr__(self):
-        return f"ModifierKey(code={self.code}, has_modifiers={self.has_modifiers})"
+        return (
+            f"ModifierKey(code={self.code}, has_modifiers={self.has_modifiers})"
+        )
 
 
 class ConsumerKey(Key):
