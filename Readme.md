@@ -154,16 +154,15 @@ Pico!
 1. Run:
 
 ```
+
+sudo apt update
+sudo snap install micropython
+sudo snap install thonny
 user=$(whoami)
 echo "$user"
 sudo usermod -a -G dialout $user
 sudo reboot now
 
-pip3 install thonny
-
-sudo apt update
-sudo apt install snapd
-sudo snap install micropython
 ```
 
 2. In the bottom right of Thonny, it may say: `Python 3.xx`, and you should
