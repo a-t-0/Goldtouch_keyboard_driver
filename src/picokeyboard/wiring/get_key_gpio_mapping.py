@@ -1,11 +1,11 @@
 """Contains functions that read out how the GPIO pins on the Raspberry Pico are
 connected through key-presses."""
 
-from src.picokeyboard.debugging.pico_probing import get_connected_pins_per_key
 from src.picokeyboard.ask_user.user_interface import (  # circuitpython only
     ask_user_to_press_pin,
     print_matrix,
 )
+from src.picokeyboard.debugging.pico_probing import get_connected_pins_per_key
 
 
 def create_emtpy_pin_connection_matrix_dictionary(*, rows):

@@ -85,12 +85,20 @@ def generate_main_key_map(rows, cols):
                 for key, value in hardcoded_lhs.items():
                     if value == (row, col):
                         found_key = True
-                        kmk_key_matrix[i][j] = f"KC.{key}"
+
+                        if key.isdigit():
+                            input(f"INT key={key}")
+                            kmk_key_matrix[i][j] = f"KC.N{key}"
+                        else:
+                            kmk_key_matrix[i][j] = f"KC.{key}"
                 for key, value in hardcoded_rhs.items():
                     if value == (row, col):
                         if not found_key:
                             found_key = True
-                            kmk_key_matrix[i][j] = f"KC.{key}"
+                            if key.isdigit():
+                                kmk_key_matrix[i][j] = f"KC.N{key}"
+                            else:
+                                kmk_key_matrix[i][j] = f"KC.{key}"
                 if not found_key:
                     # TODO: replace with permissible empty value.
                     kmk_key_matrix[i][j] = "KC._______"

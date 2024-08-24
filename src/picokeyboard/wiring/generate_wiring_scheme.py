@@ -7,14 +7,14 @@ Pico that correspond to this key.
 
 # from typeguard import typechecked
 
+from src.picokeyboard.ask_user.user_interface import (
+    ask_user_to_get_left_or_right_half,
+    print_messages,
+)
 from src.picokeyboard.debugging.debugging import list_faulty_wires
 from src.picokeyboard.hardcoded.keys import (
     load_hardcoded_left_keys,
     load_hardcoded_right_keys,
-)
-from src.picokeyboard.ask_user.user_interface import (
-    ask_user_to_get_left_or_right_half,
-    print_messages,
 )
 from src.picokeyboard.wiring.get_key_gpio_mapping import (
     get_key_connection_dictionary,

@@ -15,9 +15,10 @@ Open a terminal, type `thonny`, in `thonny` open `__main__.py`, run it and say
 `y` to the half you want to get.
 This asks you to press the keys, then it scans all GPIO ports on the Raspberry
 Pico, and determines which two GPIO pins connect which key on the keyboard.
-Current wiring 
+Current wiring
 
 # Left
+
 1Yellow
 2orange
 GND
@@ -30,13 +31,13 @@ GND
 RUN
 8green
 
-
 ## Right
-9gray 
+
+9gray
 10green
 ?
 11yellow
-12orange 
+12orange
 13Red
 14brown
 ?
