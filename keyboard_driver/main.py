@@ -73,7 +73,7 @@ keyboard.keymap = [
         KC._______,
         KC._______,
         KC._______,
-        KC.LCTRL,
+        KC.LEFT_SUPER,
         KC.ENT,
         KC.DOWN,
         KC._______,

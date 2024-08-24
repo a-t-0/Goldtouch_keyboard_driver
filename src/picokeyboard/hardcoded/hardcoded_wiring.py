@@ -85,7 +85,7 @@ hardcoded_rhs = {
 
 hardcoded_lhs = {
     "SPC": (6, 17),
-    "LCTRL": (1, 26),
+    "LCTRL": (3, 21),
     "LEFT_SHIFT": (6, 19),
     "5": (0, 16),
     "4": (0, 18),
@@ -124,7 +124,7 @@ hardcoded_lhs = {
     "G": (1, 16),
     "F": (0, 21),
     "A": (5, 21),
-    "LEFT_SUPER": (4, 20),
+    "LEFT_SUPER": (1, 26),
     "END": (3, 17),
     "C": (7, 20),
     "B": (7, 26),
