@@ -4,23 +4,23 @@ import copy
 import unittest
 from typing import List
 
-from typeguard import typechecked
-
 from src.picokeyboard.debugging.debugging import list_faulty_wires
 
 # Load fully connected keyboard half matrix dictionary.
 from src.picokeyboard.hardcoded.hardcoded_wiring import hardcoded_rhs
+
+# from typeguard import typechecked
 
 
 class Test_adder(unittest.TestCase):
     """Object used to test a parse_creds function."""
 
     # Initialize test object
-    @typechecked
+    # @typechecked
     def __init__(self, *args, **kwargs):  # type:ignore[no-untyped-def]
         super().__init__(*args, **kwargs)
 
-    @typechecked
+    # @typechecked
     def test_no_unconnected_wires(self) -> None:
         """Tests if list_faulty_wires returns an empty list if all keys are
         connected and recognised successfully."""
@@ -30,7 +30,7 @@ class Test_adder(unittest.TestCase):
         expected_error_messages: List[str] = []
         self.assertEqual(actual_error_messages, expected_error_messages)
 
-    @typechecked
+    # @typechecked
     def test_f8_not_connected(self) -> None:
         """Tests if list_faulty_wires returns an empty list if all keys are
         connected and recognised successfully."""

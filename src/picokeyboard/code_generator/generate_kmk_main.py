@@ -7,7 +7,7 @@ from src.picokeyboard.hardcoded.hardcoded_wiring import (
 )
 
 
-def generate_kmk_main():
+def generate_kmk_main() -> str:
     """This code automatically generates the Python code that creates the KMK
     main.py file/driver for the keyboard."""
 
@@ -71,6 +71,7 @@ if __name__ == '__main__':
         + part_4
     )
     print(merged_code)
+    return merged_code
 
 
 def generate_main_key_map(rows, cols):
@@ -84,12 +85,29 @@ def generate_main_key_map(rows, cols):
                 for key, value in hardcoded_lhs.items():
                     if value == (row, col):
                         found_key = True
-                        kmk_key_matrix[i][j] = f"KC.{key}"
+
+                        if key.isdigit():
+                            input(f"INT key={key}")
+                            kmk_key_matrix[i][j] = f"KC.N{key}"
+                        elif key == "PRINT_SCREEN":
+                            kmk_key_matrix[i][j] = f"KC.PGDOWN"
+                        elif key in ["RIGHT_SHIFT", "RSHIFT", "RSFT"]:
+                            kmk_key_matrix[i][j] = f"KC.PGUP"
+                        else:
+                            kmk_key_matrix[i][j] = f"KC.{key}"
                 for key, value in hardcoded_rhs.items():
                     if value == (row, col):
                         if not found_key:
                             found_key = True
-                            kmk_key_matrix[i][j] = f"KC.{key}"
+                            if key.isdigit():
+                                kmk_key_matrix[i][j] = f"KC.N{key}"
+                            elif key == "PRINT_SCREEN":
+                                kmk_key_matrix[i][j] = f"KC.PGDOWN"
+                            elif key in ["RIGHT_SHIFT", "RSHIFT", "RSFT"]:
+                                kmk_key_matrix[i][j] = f"KC.PGUP"
+                            else:
+                                kmk_key_matrix[i][j] = f"KC.{key}"
+
                 if not found_key:
                     # TODO: replace with permissible empty value.
                     kmk_key_matrix[i][j] = "KC._______"
