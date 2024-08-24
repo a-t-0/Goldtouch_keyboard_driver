@@ -5,14 +5,14 @@ keyboard as keys, and the GPIO pin pairs (in and out) of the Raspberry
 Pico that correspond to this key.
 """
 
-from typeguard import typechecked
+# from typeguard import typechecked
 
 from src.picokeyboard.debugging.debugging import list_faulty_wires
 from src.picokeyboard.hardcoded.keys import (
     load_hardcoded_left_keys,
     load_hardcoded_right_keys,
 )
-from src.picokeyboard.user_interface import (
+from src.picokeyboard.ask_user.user_interface import (
     ask_user_to_get_left_or_right_half,
     print_messages,
 )
@@ -21,7 +21,7 @@ from src.picokeyboard.wiring.get_key_gpio_mapping import (
 )
 
 
-@typechecked
+# @typechecked
 def generate_wiring_scheme_if_not_exists(*, filepath: str) -> None:
     """Creates the wiring scheme if it does not yet exist.
 
@@ -47,12 +47,12 @@ def generate_wiring_scheme_if_not_exists(*, filepath: str) -> None:
     # TODO: export left and right dict.
 
 
-@typechecked
+# @typechecked
 def wiring_scheme_exists(filename: str) -> bool:
     """Returns True if the wiring scheme already exists, false otherwise."""
 
 
-@typechecked
+# @typechecked
 def delete_wiring_scheme(filename: str) -> bool:
     """Asserts the wiring scheme exists, and then deletes it.
 
@@ -60,7 +60,7 @@ def delete_wiring_scheme(filename: str) -> bool:
     """
 
 
-@typechecked
+# @typechecked
 def export_wiring_scheme(filename: str) -> None:
     """Exports the created wiring scheme to file.
 
@@ -69,7 +69,7 @@ def export_wiring_scheme(filename: str) -> None:
     # Implement logic to import wiring scheme from filename
 
 
-@typechecked
+# @typechecked
 def import_wiring_scheme(filename: str) -> None:
     # Implement logic to import wiring scheme from filename
     pass

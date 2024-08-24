@@ -4,10 +4,10 @@ import argparse
 from argparse import ArgumentParser, Namespace
 from typing import List
 
-from typeguard import typechecked
+# from typeguard import typechecked
 
 
-@typechecked
+# @typechecked
 def parse_args() -> Namespace:
     """Creates the argument parser object and returns the parsed arguments."""
     parser: ArgumentParser = argparse.ArgumentParser(
@@ -32,7 +32,7 @@ def parse_args() -> Namespace:
     return args
 
 
-@typechecked
+# @typechecked
 def assert_only_one_action_is_asked(*, arglist: List[bool]) -> None:
     """Ensures the user only asks to do one thing."""
     if sum(arglist) > 1:

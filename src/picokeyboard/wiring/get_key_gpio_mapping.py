@@ -2,7 +2,7 @@
 connected through key-presses."""
 
 from src.picokeyboard.debugging.pico_probing import get_connected_pins_per_key
-from src.picokeyboard.user_interface import (  # circuitpython only
+from src.picokeyboard.ask_user.user_interface import (  # circuitpython only
     ask_user_to_press_pin,
     print_matrix,
 )

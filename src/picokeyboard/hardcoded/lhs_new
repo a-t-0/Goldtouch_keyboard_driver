@@ -1,0 +1,20 @@
+#  <GPIO pin nr on Pico> - wire colour - <GPIO pin nr on keyboard LHS>
+hardcoded_lhs_wires = Wires([
+    Wire(0, "blue", 5),
+    Wire(1, "green", 3),
+    Wire(2, "black", 8),
+    Wire(3, "brown", 9),
+    Wire(4, "purple", 4),
+    Wire(5, "red", 2),
+    Wire(6, "white", 6),
+    Wire(7, "yellow", 7),
+    # Then from top left to bottom left on Pico:
+    Wire(16, "yellow", 17),
+    Wire(17, "orange", 16),
+    Wire(18, "red", 10),
+    Wire(19, "brown", 11),
+    Wire(20, "white", 15),
+    Wire(21, "purple", 14),
+    Wire(22, "blue", 13),
+    Wire(26, "green", 12),
+])

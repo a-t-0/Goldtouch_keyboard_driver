@@ -7,7 +7,7 @@ from src.picokeyboard.hardcoded.hardcoded_wiring import (
 )
 
 
-def generate_kmk_main():
+def generate_kmk_main() -> str:
     """This code automatically generates the Python code that creates the KMK
     main.py file/driver for the keyboard."""
 
@@ -71,6 +71,7 @@ if __name__ == '__main__':
         + part_4
     )
     print(merged_code)
+    return merged_code
 
 
 def generate_main_key_map(rows, cols):
