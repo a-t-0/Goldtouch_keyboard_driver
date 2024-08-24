@@ -89,6 +89,10 @@ def generate_main_key_map(rows, cols):
                         if key.isdigit():
                             input(f"INT key={key}")
                             kmk_key_matrix[i][j] = f"KC.N{key}"
+                        elif key == "PRINT_SCREEN":
+                            kmk_key_matrix[i][j] = f"KC.PGDOWN"
+                        elif key in ["RIGHT_SHIFT", "RSHIFT", "RSFT"]:
+                            kmk_key_matrix[i][j] = f"KC.PGUP"
                         else:
                             kmk_key_matrix[i][j] = f"KC.{key}"
                 for key, value in hardcoded_rhs.items():
@@ -97,8 +101,13 @@ def generate_main_key_map(rows, cols):
                             found_key = True
                             if key.isdigit():
                                 kmk_key_matrix[i][j] = f"KC.N{key}"
+                            elif key == "PRINT_SCREEN":
+                                kmk_key_matrix[i][j] = f"KC.PGDOWN"
+                            elif key in ["RIGHT_SHIFT", "RSHIFT", "RSFT"]:
+                                kmk_key_matrix[i][j] = f"KC.PGUP"
                             else:
                                 kmk_key_matrix[i][j] = f"KC.{key}"
+
                 if not found_key:
                     # TODO: replace with permissible empty value.
                     kmk_key_matrix[i][j] = "KC._______"

@@ -42,7 +42,7 @@ keyboard.diode_orientation = DiodeOrientation.COL2ROW
 
 keyboard.keymap = [
     [
-        KC.PRINT_SCREEN,
+        KC.PGDOWN,
         KC.RIGHT,
         KC._______,
         KC.RIGHT_ALT,
@@ -78,7 +78,7 @@ keyboard.keymap = [
         KC.DOWN,
         KC._______,
         KC._______,
-        KC.RIGHT_SHIFT,
+        KC.PGUP,
         KC._______,
         KC.F11,
         KC.DELETE,
