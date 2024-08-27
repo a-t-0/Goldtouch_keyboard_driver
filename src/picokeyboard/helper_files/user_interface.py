@@ -1,5 +1,30 @@
 """This module does the talking to the user."""
 
+from typing import Dict
+
+
+def prompt_user(options: Dict[int, str]) -> str:
+    while True:
+        try:
+            # Display the options to the user
+            print("Choose an option:")
+            for key, value in options.items():
+                print(f"{key} for {value}")
+
+            # Get the user's choice
+            choice = int(input("Enter your choice: "))
+            option_list: List[int] = list(options.keys())
+            if choice in options.keys():
+                return choice
+            else:
+                print(
+                    "Invalid option. Please enter one of the provided options."
+                )
+        except ValueError:
+            print(
+                "Invalid input. Please enter a number corresponding to the options."
+            )
+
 
 def ask_user_to_press_pin(key):
     """Ask the user to press a key on the keyboard that is being tested."""

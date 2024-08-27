@@ -25,13 +25,14 @@ This repo currently consists of 4 code modules:
 1. keyboard driver code
    And it uses redundant wiring information to help you debugging if anything goes
    sub-optimal. The wiring is stored:
-1. In terms of wire objects that each consist of:
+
+In terms of wire objects that each consist of:
 
 - GPIO pin numbers on the pico
 - Pin number on the keyboard pin connector
 - Wire colour
 
-2. A keyboard matrix that is eventually used in the keyboard driver code.
+6. A keyboard matrix that is eventually used in the keyboard driver code.
    The `Wire` objects are used in the debugger to tell you:
 
 ```
@@ -187,3 +188,15 @@ This outputs the updated keyboard driver to (the `main.py` file in) `/keyboard_d
 
 - 10\. Open Thonny. It should say CircuitPython (generic) in the bottom right and it should recognise your Pico.
   Then open `thonny` then, inside `thonny`, open `src/picokeyboard/__main__.py` and run it by pressing the green run button.
+
+## Resetting
+
+If you want to drop a flash nuke `.uf2` file on it but it says: not enough space even though you deleted everything form the drive, run:
+
+```py
+import microcontroller
+microcontroller.on_next_reset(microcontroller.RunMode.UF2)
+microcontroller.reset()
+```
+
+in the `thonny` shell on the python. That resets it and makes it eager to take in a `.uf2` file.

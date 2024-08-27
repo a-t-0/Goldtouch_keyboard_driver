@@ -4,7 +4,7 @@ import copy
 import unittest
 from typing import List
 
-from src.picokeyboard.debugging.debugging import list_faulty_wires
+from src.picokeyboard.debugging.debug_faulty_keys import list_faulty_wires
 
 # Load fully connected keyboard half matrix dictionary.
 from src.picokeyboard.hardcoded.hardcoded_wiring import hardcoded_rhs

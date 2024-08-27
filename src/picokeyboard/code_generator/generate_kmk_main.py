@@ -87,7 +87,6 @@ def generate_main_key_map(rows, cols):
                         found_key = True
 
                         if key.isdigit():
-                            input(f"INT key={key}")
                             kmk_key_matrix[i][j] = f"KC.N{key}"
                         elif key == "PRINT_SCREEN":
                             kmk_key_matrix[i][j] = "KC.PGDOWN"

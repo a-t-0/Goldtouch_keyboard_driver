@@ -6,7 +6,7 @@ If they are it implies a key is being pressed.
 
 import digitalio
 
-from src.picokeyboard.wiring.get_gpio_pin_nrs import (
+from src.picokeyboard.get_keyboard_matrix.get_gpio_pin_nrs import (
     get_pico_gpio_pin_nrs,
     pin_to_board_pin,
 )
