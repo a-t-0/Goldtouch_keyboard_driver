@@ -1,9 +1,9 @@
 """This module does the talking to the user."""
 
-from typing import Dict
+# from typing import Dict
 
 
-def prompt_user(options: Dict[int, str]) -> str:
+def prompt_user(options: dict[int, str]) -> str:
     while True:
         try:
             # Display the options to the user
@@ -13,7 +13,7 @@ def prompt_user(options: Dict[int, str]) -> str:
 
             # Get the user's choice
             choice = int(input("Enter your choice: "))
-            option_list: List[int] = list(options.keys())
+            option_list: list[int] = list(options.keys())
             if choice in options.keys():
                 return choice
             else:
