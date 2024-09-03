@@ -22,7 +22,7 @@ from src.picokeyboard.helper_files.user_interface import (
 
 
 # @typechecked
-def generate_keyboard_matrix() -> None:
+def gen_keyboard_matrix() -> None:
     """Creates the wiring scheme if it does not yet exist.
 
     Otherwise throws error. It asks the user to press each key in the
