@@ -21,7 +21,7 @@ def assert_can_run(
             keyboard_driver_main_content=keyboard_driver_main,
             kmk_main_rel_filepath=kmk_main_rel_filepath,
         )
-    assert_file_exists(kmk_main_rel_filepath)  # Superfluous.
+    assert_file_exists(file_path=kmk_main_rel_filepath)  # Superfluous.
 
     if not os.path.exists(kmk_rel_dir_path):
         raise NotImplementedError(

@@ -4,9 +4,13 @@
 from src.picokeyboard.code_generator.generate_kmk_main import generate_kmk_main
 from src.picokeyboard.code_generator.output_kmk_main import output_kmk_main
 from src.picokeyboard.helper_files.user_interface import prompt_user
+from src.picokeyboard.running_code.check_prerequisites import (
+        assert_can_run,
+    )
 
 rel_wiring_filepath: str = "output/wiring_scheme.py"
 kmk_main_rel_filepath: str = "keyboard_driver/main.py"
+kmk_rel_dir_path: str = "kmk"
 options = {
     1: "Get keyboard matrix (run in Thonny)",
     2: "Debug wiring (run in Thonny)",
@@ -42,10 +46,13 @@ elif user_choice == 3:
 elif user_choice == 4:
     # If this code is not ran on the Pico, generate the Python code that
     # creates the KMK main.py file/driver for the keyboard.
-    print(
-        "TODO: copy the relevant files into the Pico, and verify the"
-        " prerequisites are satisfied."
+    keyboard_driver_main: str = generate_kmk_main()
+    assert_can_run(
+    kmk_main_rel_filepath=kmk_main_rel_filepath,
+    kmk_rel_dir_path=kmk_rel_dir_path,
+    keyboard_driver_main=keyboard_driver_main,
     )
+
 else:
     raise SystemError("Please try again and enter a valid choice.")
 
