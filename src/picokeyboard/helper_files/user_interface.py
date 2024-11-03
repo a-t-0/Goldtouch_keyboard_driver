@@ -13,7 +13,6 @@ def prompt_user(options: dict[int, str]) -> str:
 
             # Get the user's choice
             choice = int(input("Enter your choice: "))
-            option_list: list[int] = list(options.keys())
             if choice in options.keys():
                 return choice
             else:
@@ -22,7 +21,8 @@ def prompt_user(options: dict[int, str]) -> str:
                 )
         except ValueError:
             print(
-                "Invalid input. Please enter a number corresponding to the options."
+                "Invalid input. Please enter a number corresponding to"
+                + " the options."
             )
 
 
