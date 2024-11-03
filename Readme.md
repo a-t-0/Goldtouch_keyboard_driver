@@ -130,23 +130,10 @@ in the `hardcoded_wiring.py` file. The specific instructions are in that file as
   connected to which GPIO port on your pico, and create a keyboard matrix for
   you, that will be used by the keyboard driver. To generate this matrix, run:
 
-  - 5.1. Copy the `src` dir of this repository into the root of the USB drive with
+  - 5.1. Copy the `src` dir and `boot.py` file of this repository into the root of the USB drive with
     CircuitPython. <TODO>
   - 5.2. Open the `src/picokeyboard/__main__.py` file in Thonny on the Pico, <TODO>
-  - 5.3. Set:<TODO>
-
-  ```py
-  store_wiring = True
-  ```
-
-  and:
-
-  ```py
-  debug_wiring= False
-  install = False
-  use = False
-  ```
-
+  
   - 5.4. Run the `__main__.py` file (with `F5`) and follow the instructions. <TODO>
 
   - 5.4.1. If you have a perfectly working keyboard:
@@ -198,5 +185,23 @@ import microcontroller
 microcontroller.on_next_reset(microcontroller.RunMode.UF2)
 microcontroller.reset()
 ```
-
 in the `thonny` shell on the python. That resets it and makes it eager to take in a `.uf2` file.
+
+If you are in MicroPython (instead of CircuitPython), type:
+```py
+machine.bootloader()
+```
+(*without* typing `import machine` first).
+
+
+## Enabling CircuitPython to write files to itself:
+Create a `boot.py` at the root of the CircuitPython USB drive with content:
+```py
+import storage
+storage.remount('/', readonly=False)
+```
+Then you can make the CircuitPython create files inside the CircuitPython USB drive with:
+```
+with open('/x.txt`, 'w') as f:
+  f.write(b'abcdefg')
+```
