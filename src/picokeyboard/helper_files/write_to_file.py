@@ -16,7 +16,6 @@ def assert_file_exists(*, file_path: str) -> None:
     Returns:
         bool: True if the file exists, False otherwise.
     """
-    file_exists = os.path.isfile(file_path)
     assert file_exists(file_path=file_path), f"File does not exist:{file_path}"
 
 
