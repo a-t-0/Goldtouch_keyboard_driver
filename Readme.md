@@ -25,13 +25,14 @@ This repo currently consists of 4 code modules:
 1. keyboard driver code
    And it uses redundant wiring information to help you debugging if anything goes
    sub-optimal. The wiring is stored:
-1. In terms of wire objects that each consist of:
+
+In terms of wire objects that each consist of:
 
 - GPIO pin numbers on the pico
 - Pin number on the keyboard pin connector
 - Wire colour
 
-2. A keyboard matrix that is eventually used in the keyboard driver code.
+6. A keyboard matrix that is eventually used in the keyboard driver code.
    The `Wire` objects are used in the debugger to tell you:
 
 ```
@@ -129,22 +130,10 @@ in the `hardcoded_wiring.py` file. The specific instructions are in that file as
   connected to which GPIO port on your pico, and create a keyboard matrix for
   you, that will be used by the keyboard driver. To generate this matrix, run:
 
-  - 5.1. Copy the `src` dir of this repository into the root of the USB drive with
+  - 5.1. Copy the `src` dir and `boot.py` file of this repository into the root of the USB drive with
     CircuitPython. <TODO>
+
   - 5.2. Open the `src/picokeyboard/__main__.py` file in Thonny on the Pico, <TODO>
-  - 5.3. Set:<TODO>
-
-  ```py
-  store_wiring = True
-  ```
-
-  and:
-
-  ```py
-  debug_wiring= False
-  install = False
-  use = False
-  ```
 
   - 5.4. Run the `__main__.py` file (with `F5`) and follow the instructions. <TODO>
 
@@ -187,3 +176,39 @@ This outputs the updated keyboard driver to (the `main.py` file in) `/keyboard_d
 
 - 10\. Open Thonny. It should say CircuitPython (generic) in the bottom right and it should recognise your Pico.
   Then open `thonny` then, inside `thonny`, open `src/picokeyboard/__main__.py` and run it by pressing the green run button.
+
+## Resetting
+
+If you want to drop a flash nuke `.uf2` file on it but it says: not enough space even though you deleted everything form the drive, run:
+
+```py
+import microcontroller
+microcontroller.on_next_reset(microcontroller.RunMode.UF2)
+microcontroller.reset()
+```
+
+in the `thonny` shell on the python. That resets it and makes it eager to take in a `.uf2` file.
+
+If you are in MicroPython (instead of CircuitPython), type:
+
+```py
+machine.bootloader()
+```
+
+(*without* typing `import machine` first).
+
+## Enabling CircuitPython to write files to itself:
+
+Create a `boot.py` at the root of the CircuitPython USB drive with content:
+
+```py
+import storage
+storage.remount('/', readonly=False)
+```
+
+Then you can make the CircuitPython create files inside the CircuitPython USB drive with:
+
+```
+with open('/x.txt`, 'w') as f:
+  f.write(b'abcdefg')
+```

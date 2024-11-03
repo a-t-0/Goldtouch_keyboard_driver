@@ -1,52 +1,60 @@
 """Entry point for the project."""
 
-# from argparse import Namespace
-
-# from typeguard import typechecked
-
-# from src.picokeyboard.argparser import parse_args
+# try:
 from src.picokeyboard.code_generator.generate_kmk_main import generate_kmk_main
 from src.picokeyboard.code_generator.output_kmk_main import output_kmk_main
+from src.picokeyboard.helper_files.user_interface import prompt_user
+from src.picokeyboard.running_code.check_prerequisites import (
+        assert_can_run,
+    )
 
 rel_wiring_filepath: str = "output/wiring_scheme.py"
 kmk_main_rel_filepath: str = "keyboard_driver/main.py"
-# args: Namespace = parse_args()
+kmk_rel_dir_path: str = "kmk"
+options = {
+    1: "Get keyboard matrix (run in Thonny)",
+    2: "Debug wiring (run in Thonny)",
+    3: "Generate keyboard driver code (run on Ubuntu)",
+    4: "Use keyboard (run in Thonny)",
+}
 
-store_wiring = False
-debug_wiring = False
-create_keybaord_driver = True
-install = False
-use = False
-# @typechecked
-# def process_args(*, args: Namespace, rel_wiring_filepath: str) -> None:
-# """Calls the functions that are requested in the args."""
-if store_wiring:
-    from src.picokeyboard.wiring.generate_wiring_scheme import (
-        generate_wiring_scheme_if_not_exists,
+
+# write_to_file(content="hello world", local_filepath="/home/a/hello.txt")
+
+user_choice: int = prompt_user(options=options)
+if user_choice == 1:
+    # TODO: output the keyboard matrix to a file, and automatically load it
+    # from that position once the driver is made.
+    from src.picokeyboard.get_keyboard_matrix.generate_keyboard_matrix import (
+        gen_keyboard_matrix,
     )
 
-    generate_wiring_scheme_if_not_exists(filepath=rel_wiring_filepath)
-elif debug_wiring:
-    from src.picokeyboard.debugging.debugging import debug_keyboard_keys
+    gen_keyboard_matrix()
+elif user_choice == 2:
+    # TODO: allow user to get the gpio pin on the pico, wire colour key and
+    # pin nr on keyboard half connector for a specific key that malfunctions.
+    from src.picokeyboard.debugging.debug_faulty_keys import debug_faulty_keys
 
-    debug_keyboard_keys()
-elif create_keybaord_driver:
+    debug_faulty_keys()
+elif user_choice == 3:
+    # TODO: output this locally and include it in src.
     keyboard_driver_main: str = generate_kmk_main()
     output_kmk_main(
-        keyboard_driver_main=keyboard_driver_main,
+        keyboard_driver_main_content=keyboard_driver_main,
         kmk_main_rel_filepath=kmk_main_rel_filepath,
     )
-elif install:
+elif user_choice == 4:
     # If this code is not ran on the Pico, generate the Python code that
     # creates the KMK main.py file/driver for the keyboard.
-    print(
-        "TODO: copy the relevant files into the Pico, and verify the"
-        " prerequisites are satisfied."
+    keyboard_driver_main: str = generate_kmk_main()
+    assert_can_run(
+    kmk_main_rel_filepath=kmk_main_rel_filepath,
+    kmk_rel_dir_path=kmk_rel_dir_path,
+    keyboard_driver_main=keyboard_driver_main,
     )
-elif use:
-    print("TODO: launch the keyboard.")
+
 else:
-    raise SystemError(
-        "This code should not be reached, the argparser should have"
-        " asserted at least one CLI argument option is selected."
-    )
+    raise SystemError("Please try again and enter a valid choice.")
+
+# except ImportError:
+#     pass  # ignore the error

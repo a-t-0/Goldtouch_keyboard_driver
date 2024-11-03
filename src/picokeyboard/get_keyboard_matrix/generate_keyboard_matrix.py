@@ -7,22 +7,22 @@ Pico that correspond to this key.
 
 # from typeguard import typechecked
 
-from src.picokeyboard.ask_user.user_interface import (
-    ask_user_to_get_left_or_right_half,
-    print_messages,
+from src.picokeyboard.debugging.debug_faulty_keys import list_faulty_wires
+from src.picokeyboard.get_keyboard_matrix.get_key_gpio_mapping import (
+    get_key_connection_dictionary,
 )
-from src.picokeyboard.debugging.debugging import list_faulty_wires
 from src.picokeyboard.hardcoded.keys import (
     load_hardcoded_left_keys,
     load_hardcoded_right_keys,
 )
-from src.picokeyboard.wiring.get_key_gpio_mapping import (
-    get_key_connection_dictionary,
+from src.picokeyboard.helper_files.user_interface import (
+    ask_user_to_get_left_or_right_half,
+    print_messages,
 )
 
 
 # @typechecked
-def generate_wiring_scheme_if_not_exists(*, filepath: str) -> None:
+def gen_keyboard_matrix() -> None:
     """Creates the wiring scheme if it does not yet exist.
 
     Otherwise throws error. It asks the user to press each key in the

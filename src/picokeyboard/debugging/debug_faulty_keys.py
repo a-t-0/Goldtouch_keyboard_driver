@@ -1,9 +1,8 @@
 """Helps the user identify which wire connection is not working properly, if
 any."""
 
-from src.picokeyboard.ask_user.user_interface import (
-    ask_user_to_get_left_or_right_half,
-    print_messages,
+from src.picokeyboard.get_keyboard_matrix.get_key_gpio_mapping import (
+    get_key_connection_dictionary,
 )
 from src.picokeyboard.hardcoded.hardcoded_wiring import (
     hardcoded_lhs,
@@ -15,12 +14,13 @@ from src.picokeyboard.hardcoded.keys import (
     load_hardcoded_left_keys,
     load_hardcoded_right_keys,
 )
-from src.picokeyboard.wiring.get_key_gpio_mapping import (
-    get_key_connection_dictionary,
+from src.picokeyboard.helper_files.user_interface import (
+    ask_user_to_get_left_or_right_half,
+    print_messages,
 )
 
 
-def debug_keyboard_keys() -> None:
+def debug_faulty_keys() -> None:
     """Loads the wiring scheme, then asks the user to press each key, and then
     prints which wires are not wired correctly."""
 
