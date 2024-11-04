@@ -4,9 +4,7 @@
 from src.picokeyboard.code_generator.generate_kmk_main import generate_kmk_main
 from src.picokeyboard.code_generator.output_kmk_main import output_kmk_main
 from src.picokeyboard.helper_files.user_interface import prompt_user
-from src.picokeyboard.running_code.check_prerequisites import (
-        assert_can_run,
-    )
+from src.picokeyboard.running_code.check_prerequisites import assert_can_run
 
 rel_wiring_filepath: str = "output/wiring_scheme.py"
 kmk_main_rel_filepath: str = "keyboard_driver/main.py"
@@ -48,9 +46,9 @@ elif user_choice == 4:
     # creates the KMK main.py file/driver for the keyboard.
     keyboard_driver_main: str = generate_kmk_main()
     assert_can_run(
-    kmk_main_rel_filepath=kmk_main_rel_filepath,
-    kmk_rel_dir_path=kmk_rel_dir_path,
-    keyboard_driver_main=keyboard_driver_main,
+        kmk_main_rel_filepath=kmk_main_rel_filepath,
+        kmk_rel_dir_path=kmk_rel_dir_path,
+        keyboard_driver_main=keyboard_driver_main,
     )
 
 else:
