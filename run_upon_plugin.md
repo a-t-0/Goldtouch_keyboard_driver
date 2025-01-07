@@ -1,5 +1,6 @@
 # Using wifi to run keyboard from terminal
 
+## A. Identify Keyboard USB port.
 0. Connect your pico through usb.
 1. Get the port on which it runs with:
 
@@ -27,9 +28,9 @@ pip install mpremote
 mpremote connect /dev/ttyACM0 run /media/a/CIRCUITPY/main.py
 ```
 
-## Pico running script.
+## B. Create script to run Pico keyboard.
 
-Put this filecontent at `/home/a/run_pico_keyboard.sh`:
+0. Put this filecontent at `/home/a/run_pico_keyboard.sh`:
 
 ```sh
 #!/bin/bash
@@ -46,36 +47,22 @@ done
 } || true
 echo "$(date '+%Y-%m-%d %H:%M:%S') Done starting keyboard." >> /home/a/git/hello.md
 ```
-
-## Original
-
-Source: https://chatgpt.com/c/6727c612-e80c-8007-8b3b-fe4cfb434f49
-
-```sh
-sudo nano /etc/udev/rules.d/99-pico-w.rules
-ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyACM0", RUN+="/home/a/run_pico_keyboard.sh"
-sudo udevadm control --reload-rules
-```
-
-## Working Retry
+``
+## C. Ensure the Pico keyboard script runs upon plugin
 
 Source: https://stackoverflow.com/questions/18463755/linux-start-daemon-on-connected-usb-serial-dongle
-First add a rule:
-
+0. Create a rule that connects the keyboard usb port with the service to run the script:
 ```sh
 sudo nano /etc/udev/rules.d/95-serialdaemon.rules
 KERNEL=="ttyACM0", TAG+="systemd", ENV{SYSTEMD_WANTS}="serialdaemon.service"
 ```
 
-Then change to:
+1. Create a service that executes the rule/pico run script upon plugging in the keyboard:
 
 ```sh
 sudo nano /lib/systemd/system/serialdaemon.service
-# cat /lib/systemd/system/serialdaemon.service
 ```
-
-And put content:
-
+With content:
 ```
 [Unit]
 Description=USB Pico Keyboard
@@ -85,24 +72,24 @@ After=syslog.target
 [Service]
 ExecStart=/home/a/run_pico_keyboard.sh
 ```
-
-## Reload
-
-Then restart the service with:
+2. Then restart the service with:
 
 ```sh
 sudo systemctl daemon-reload
 sudo systemctl start serialdaemon.service
 ```
+3. REBOOT YOUR PC with:
+```sh
+sudo reboot
+```
 
-## Debugging
 
+## D. Debugging
 ```sh
 journalctl -u serialdaemon.service -f
 ```
 
-## Remove systemd
-
+## E. Remove systemd
 ```sh
 sudo systemctl stop /etc/systemd/system/run_pico_keyboard.service
 sudo systemctl disable /etc/systemd/system/run_pico_keyboard.service
